@@ -16,6 +16,7 @@ Le code fourni n’a pas été testé, il pourrait ne pas être exempt d’erreu
 Le dialogue utilisateur est pour le moment inexistant, il serait souhaitable qu’une interface, même simple soit proposée.
 Le logiciel est pour le moment mono-utilisateur, il faudrait centraliser son contenu dans une base de données relationnelle pour pouvoir se connecter à plusieurs.
 Le personnel des ligues serait particulièrement intéressé par l’idée de pouvoir contacter toutes les personnes inscrites à une compétition, par exemple pour les convoquer par mail.
+
 3  Résultats attendus à l’itération 1
 Il serait souhaitable que les fonctionnalités ci-après soient mises en place. Si vous n’avez pas le temps de toutes les traiter, occupez-vous d’abord des plus importantes. S’il reste du temps, cherchez des améliorations à apporter.
 
