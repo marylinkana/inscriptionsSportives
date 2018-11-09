@@ -1,0 +1,28 @@
+3  Résultats attendus à l’itération 1
+
+Il serait souhaitable que les fonctionnalités ci-après soient mises en place. Si vous n’avez pas le temps de toutes les traiter, occupez-vous d’abord des plus importantes. S’il reste du temps, cherchez des améliorations à apporter.
+
+
+3.1  Application Java
+a) Tests unitaires.
+b) Ajout des fonctionalités manquantes, indiquées dans le code avec des //TODO
+c) Ajout d’exceptions dans la couche métier pour gérer les erreurs (rejet de l’inscription d’un candidat à une compétition, etc).
+Etude de la bibliothèque disponible dans ce dépôt. Comme ce code est sur github et qu’il peut être mis à jour, ne le copiez-collez pas dans votre projet ! Importez-le dans votre workspace et ajoutez-le aux dépendances de votre projet.
+
+  
+
+REPARTITION DES TACHES 
+
+a) Test Unitaire -> Marylin : en cours...
+
+b1) Competition.Java\TODO -> Antoine : en cours...
+
+b2) Equipe.java\TODO -> ...
+
+c1) Competition\EXCEPTION -> ...
+
+c2) Equipe\EXCEPTION -> ...
+
+c3) Inscription\EXCEPTION -> ...
+
+
