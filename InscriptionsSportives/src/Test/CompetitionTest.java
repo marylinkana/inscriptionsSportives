@@ -16,7 +16,7 @@ import inscriptions.Inscriptions;
 import inscriptions.Personne;
 import inscriptions.Equipe;
 
-public class TestunitaireCompetition {
+public class CompetitionTest {
 	Inscriptions inscriptions = Inscriptions.getInscriptions();
 	
 	Personne personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
@@ -91,9 +91,10 @@ public class TestunitaireCompetition {
 	}
 	
 //	@Test
-//	public void testgetPersonnesAInscrire() 
+//	public void testgetCandidatsAInscrire() 
 //	{
-//		assertTrue(competitiontest.getPersonnesAInscrire().contains(personnetest));
+//		competitiontest.add(personnetest);
+//		assertTrue(!competitiontest.getCandidatsAInscrire().contains(personnetest));
 //	}
 	
 	@Test

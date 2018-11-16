@@ -15,7 +15,9 @@ import inscriptions.Inscriptions;
 import inscriptions.Personne;
 import inscriptions.Equipe;
 
-public class TestunitaireEquipe {
+
+public class CandidatTest {
+	
 	Inscriptions inscriptions = Inscriptions.getInscriptions();
 	
 	Personne personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
@@ -27,34 +29,54 @@ public class TestunitaireEquipe {
 	Equipe equipetest = inscriptions.createEquipe("nomequipetest");
 	Equipe equipetest2 = inscriptions.createEquipe("nomequipetest2");
 	
+	
+	
 	@Test
-	public void testgetMembres() {
+	public void testgetNom()
+	 {
+		String getNom = personnetest.getNom();
+		assertEquals("nomtest", getNom );
+	 }
+	
+	@Test
+	public void testsetNom()
+	 {
+		personnetest.setNom("nomsettest");
+		
+		String nomset = personnetest.getNom();
+		assertEquals("nomsettest", nomset );
+		
+	 }
+	
+	@Test
+	public void testgetCompetition()
+	{
+		competitiontest.add(personnetest);
 		equipetest.add(personnetest);
-		assertEquals(personnetest, equipetest.getMembres());
+		
+		assertTrue(personnetest.getCompetitions().contains(competitiontest));
 	}
 	
 	@Test
-	public void testadd() {
-		equipetest2.add(personnetest2);
-		assertTrue(equipetest2.getMembres().contains(personnetest2));
+	public void testdelate()
+	{
+		personnetest2.delete();
+		
+		assertTrue(!inscriptions.getCandidats().contains(personnetest2));
 	}
 	
 	@Test
-	public void remove() {
-		equipetest2.add(personnetest2);
-		equipetest2.remove(personnetest2);
-		assertFalse(equipetest2.getMembres().contains(personnetest2));
+	public void testcompareTopersonne()
+	{
+		Personne personnetestbis = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
+		assertEquals(0, personnetest.compareTo(personnetestbis) );
 	}
 	
-//	@Test
-//	public void testgetPersonnesAAjouter() {
-//		
-//		assertTrue(equipetest2.getPersonnesAAjouter().contains(personnetest));
-//	}
+	@Test
+	public void testtoString()
+	{
+		assertTrue(!personnetest.toString().contentEquals(""));
+	}
 	
-//	@Test
-//	public void testdelete() {
-//		personnetest2.delete();
-//		assertFalse( );
-//	}
 }
+	

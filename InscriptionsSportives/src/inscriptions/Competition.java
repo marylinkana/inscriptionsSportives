@@ -145,17 +145,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * Retourne les personnes que l'on peut inscrire à cette competition.
 	 * @return les personnes que l'on peut inscrire à cette compétition.
 	 */
-
-	public Set<Personne> getPersonnesAInscrire()
-	{
-		// TODO retourner les personnes que l'on peut inscrire à cette compétition.
-		return null;
-	}
-
-	/**
-	 * Retourne les Candidats que l'on peut inscrire à cette competition.
-	 * @return les candidats que l'on peut inscrire à cette compétition.
-	 */
 	
 	public Set<Candidat> getCandidatsAInscrire()
 	{

@@ -15,9 +15,7 @@ import inscriptions.Inscriptions;
 import inscriptions.Personne;
 import inscriptions.Equipe;
 
-
-public class TestunitaireCandidat {
-	
+public class EquipeTest {
 	Inscriptions inscriptions = Inscriptions.getInscriptions();
 	
 	Personne personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
@@ -29,54 +27,41 @@ public class TestunitaireCandidat {
 	Equipe equipetest = inscriptions.createEquipe("nomequipetest");
 	Equipe equipetest2 = inscriptions.createEquipe("nomequipetest2");
 	
-	
-	
 	@Test
-	public void testgetNom()
-	 {
-		String getNom = personnetest.getNom();
-		assertEquals("nomtest", getNom );
-	 }
-	
-	@Test
-	public void testsetNom()
-	 {
-		personnetest.setNom("setprenomtest");
-		
-		String setNom = personnetest.getNom();
-		assertEquals("setprenomtest", setNom );
-		
-	 }
-	
-	@Test
-	public void testgetCompetition()
-	{
-		competitiontest.add(personnetest);
+	public void testgetMembres() {
 		equipetest.add(personnetest);
-		
-		assertTrue(personnetest.getCompetitions().contains(competitiontest));
+		assertEquals(personnetest, equipetest.getMembres());
 	}
 	
 	@Test
-	public void testdelate()
-	{
+	public void testadd() {
+		equipetest2.add(personnetest2);
+		assertTrue(equipetest2.getMembres().contains(personnetest2));
+	}
+	
+	@Test
+	public void remove() {
+		equipetest2.add(personnetest2);
+		equipetest2.remove(personnetest2);
+		assertFalse(equipetest2.getMembres().contains(personnetest2));
+	}
+	
+//	@Test
+//	public void testgetPersonnesAAjouter() {
+//		equipetest.add(personnetest);
+//		assertTrue(!equipetest2.getPersonnesAAjouter().contains(personnetest));
+//	}
+	
+	@Test
+	public void testdelete() {
+		competitiontest.add(personnetest2);
+		equipetest.add(personnetest2);
 		personnetest2.delete();
-		
-		assertTrue(!inscriptions.getCandidats().contains(personnetest2));
+		assertFalse(competitiontest.getCandidats().contains(personnetest2));
+		assertFalse(equipetest.getMembres().contains(personnetest2));
 	}
 	
-	@Test
-	public void testcompareTopersonne()
-	{
-		Personne personnetestbis = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
-		assertEquals(0, personnetest.compareTo(personnetestbis) );
-	}
 	
-	@Test
-	public void testtoString()
-	{
-		assertTrue(!personnetest.toString().contentEquals(""));
-	}
+	
 	
 }
-	
