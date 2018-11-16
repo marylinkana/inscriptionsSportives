@@ -75,12 +75,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/InscriptionsSportives/src/inscriptions/Competition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
+            <state relative-caret-position="1122">
+              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#960#961#0" expanded="true" />
                 <element signature="e#977#978#0" expanded="true" />
+                <element signature="e#1144#1145#0" expanded="true" />
+                <element signature="e#1201#1202#0" expanded="true" />
                 <element signature="e#1406#1407#0" expanded="true" />
                 <element signature="e#1431#1432#0" expanded="true" />
                 <element signature="e#1565#1566#0" expanded="true" />
@@ -187,7 +189,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542359011578" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542359989905" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Réponses/inscriptionsSportives-master" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -218,12 +220,12 @@
       <workItem from="1541756241847" duration="5575000" />
       <workItem from="1541773338921" duration="2518000" />
       <workItem from="1542292493360" duration="738000" />
-      <workItem from="1542357056425" duration="2291000" />
+      <workItem from="1542357056425" duration="2839000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11909000" />
+    <option name="totallyTimeSpent" value="12457000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -312,12 +314,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/InscriptionsSportives/src/inscriptions/Competition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
+        <state relative-caret-position="1122">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#960#961#0" expanded="true" />
             <element signature="e#977#978#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="e#1201#1202#0" expanded="true" />
             <element signature="e#1406#1407#0" expanded="true" />
             <element signature="e#1431#1432#0" expanded="true" />
             <element signature="e#1565#1566#0" expanded="true" />
