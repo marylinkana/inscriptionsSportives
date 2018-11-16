@@ -1,4 +1,3 @@
-
 package inscriptions;
 
 import java.io.Serializable;
@@ -43,6 +42,15 @@ public class Competition implements Comparable<Competition>, Serializable
 	}
 
 	/**
+	 * Modifie le nom de la compétition.
+	 */
+
+	public void setNom(String nom)
+	{
+		this.nom = nom ;
+	}
+
+	/**
 	 * Retourne vrai si les inscriptions sont encore ouvertes,
 	 * faux si les inscriptions sont closes.
 	 * @return
@@ -51,8 +59,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean inscriptionsOuvertes()
 	{
 		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
-		return dateCloture.isBefore(LocalDate.now());
-
+		return true;
 	}
 
 	/**
@@ -84,8 +91,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public void setDateCloture(LocalDate dateCloture)
 	{
 		// TODO vérifier que l'on avance pas la date.
-		if (this.dateCloture.isBefore(dateCloture))
-			this.dateCloture = dateCloture;
+		this.dateCloture = dateCloture;
 	}
 
 	/**
@@ -108,19 +114,11 @@ public class Competition implements Comparable<Competition>, Serializable
 
 	public boolean add(Personne personne)
 	{
-//		if ( this.enEquipe ){
-//			throw new RuntimeException();
-//		}
-
-		if( this.inscriptionsOuvertes() ) {
-			personne.add(this);
-			Boolean r = candidats.add(personne);
-
-			Application.saveEntity(this);
-			return r;
-		} else {
-			throw new RuntimeException("Les inscriptions sont fermer!");
-		}
+		// TODO vérifier que la date de clôture n'est pas passée
+		if (enEquipe)
+			throw new RuntimeException();
+		personne.add(this);
+		return candidats.add(personne);
 	}
 
 	/**
@@ -133,14 +131,25 @@ public class Competition implements Comparable<Competition>, Serializable
 
 	public boolean add(Equipe equipe)
 	{
+		if (!enEquipe)
+			throw new RuntimeException();
 		if( this.inscriptionsOuvertes() ) {
-			equipe.add(this);
-			Boolean r = candidats.add(equipe);
-
-			Application.saveEntity(this);
-			return r;
+		// TODO vérifier que la date de clôture n'est pas passée
+		equipe.add(this);
+		return candidats.add(equipe);
 		}
-		return false;
+		else return false;
+	}
+
+	/**
+	 * Retourne les personnes que l'on peut inscrire à cette competition.
+	 * @return les personnes que l'on peut inscrire à cette compétition.
+	 */
+
+	public Set<Personne> getPersonnesAInscrire()
+	{
+		// TODO retourner les personnes que l'on peut inscrire à cette compétition.
+		return null;
 	}
 
 	/**
@@ -174,7 +183,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		for (Candidat candidat : candidats)
 			remove(candidat);
-		inscriptions.remove(this);
+		inscriptions.delete(this);
 	}
 
 	@Override
