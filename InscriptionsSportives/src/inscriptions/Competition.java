@@ -41,6 +41,12 @@ public class Competition implements Comparable<Competition>, Serializable
 		return nom;
 	}
 
+	public void setNom(String nom)
+	{
+		this.nom = nom ;
+		Application.saveEntity(this);
+	}
+
 	/**
 	 * Retourne vrai si les inscriptions sont encore ouvertes,
 	 * faux si les inscriptions sont closes.
@@ -49,9 +55,7 @@ public class Competition implements Comparable<Competition>, Serializable
 
 	public boolean inscriptionsOuvertes()
 	{
-		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
-		return dateCloture.isBefore(LocalDate.now());
-
+		return this.dateCloture.isAfter( LocalDate.now() );
 	}
 
 	/**
@@ -86,6 +90,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (this.dateCloture.isBefore(dateCloture))
 			this.dateCloture = dateCloture;
 	}
+
 
 	/**
 	 * Retourne l'ensemble des candidats inscrits.
