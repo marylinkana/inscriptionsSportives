@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57c493eb-b71e-4367-9664-26b521237810" name="Default Changelist" comment="" />
+    <list default="true" id="57c493eb-b71e-4367-9664-26b521237810" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/InscriptionsSportives/src/inscriptions/Competition.java" beforeDir="false" afterPath="$PROJECT_DIR$/InscriptionsSportives/src/inscriptions/Competition.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/InscriptionsSportives/src/inscriptions/Competition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="108" column="5" lean-forward="true" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
+            <state relative-caret-position="181">
+              <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#960#961#0" expanded="true" />
@@ -185,7 +187,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542358424400" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542359011578" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Réponses/inscriptionsSportives-master" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -216,12 +218,12 @@
       <workItem from="1541756241847" duration="5575000" />
       <workItem from="1541773338921" duration="2518000" />
       <workItem from="1542292493360" duration="738000" />
-      <workItem from="1542357056425" duration="1580000" />
+      <workItem from="1542357056425" duration="2291000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11198000" />
+    <option name="totallyTimeSpent" value="11909000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -310,8 +312,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/InscriptionsSportives/src/inscriptions/Competition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="108" column="5" lean-forward="true" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
+        <state relative-caret-position="181">
+          <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#960#961#0" expanded="true" />
