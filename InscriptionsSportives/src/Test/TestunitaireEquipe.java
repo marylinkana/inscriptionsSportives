@@ -39,6 +39,22 @@ public class TestunitaireEquipe {
 		assertTrue(equipetest2.getMembres().contains(personnetest2));
 	}
 	
+	@Test
+	public void remove() {
+		equipetest2.add(personnetest2);
+		equipetest2.remove(personnetest2);
+		assertFalse(equipetest2.getMembres().contains(personnetest2));
+	}
+	
 //	@Test
-//	public void 
+//	public void testgetPersonnesAAjouter() {
+//		
+//		assertTrue(equipetest2.getPersonnesAAjouter().contains(personnetest));
+//	}
+	
+//	@Test
+//	public void testdelete() {
+//		personnetest2.delete();
+//		assertFalse( );
+//	}
 }
