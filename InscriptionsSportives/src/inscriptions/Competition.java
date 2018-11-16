@@ -1,4 +1,3 @@
-
 package inscriptions;
 
 import java.io.Serializable;
@@ -41,10 +40,13 @@ public class Competition implements Comparable<Competition>, Serializable
 		return nom;
 	}
 
+	/**
+	 * Modifie le nom de la compétition.
+	 */
+
 	public void setNom(String nom)
 	{
 		this.nom = nom ;
-		Application.saveEntity(this);
 	}
 
 	/**
@@ -55,7 +57,8 @@ public class Competition implements Comparable<Competition>, Serializable
 
 	public boolean inscriptionsOuvertes()
 	{
-		return this.dateCloture.isAfter( LocalDate.now() );
+		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
+		return true;
 	}
 
 	/**
@@ -87,10 +90,8 @@ public class Competition implements Comparable<Competition>, Serializable
 	public void setDateCloture(LocalDate dateCloture)
 	{
 		// TODO vérifier que l'on avance pas la date.
-		if (this.dateCloture.isBefore(dateCloture))
-			this.dateCloture = dateCloture;
+		this.dateCloture = dateCloture;
 	}
-
 
 	/**
 	 * Retourne l'ensemble des candidats inscrits.
@@ -112,19 +113,11 @@ public class Competition implements Comparable<Competition>, Serializable
 
 	public boolean add(Personne personne)
 	{
-//		if ( this.enEquipe ){
-//			throw new RuntimeException();
-//		}
-
-		if( this.inscriptionsOuvertes() ) {
-			personne.add(this);
-			Boolean r = candidats.add(personne);
-
-			Application.saveEntity(this);
-			return r;
-		} else {
-			throw new RuntimeException("Les inscriptions sont fermer!");
-		}
+		// TODO vérifier que la date de clôture n'est pas passée
+		if (enEquipe)
+			throw new RuntimeException();
+		personne.add(this);
+		return candidats.add(personne);
 	}
 
 	/**
@@ -137,18 +130,22 @@ public class Competition implements Comparable<Competition>, Serializable
 
 	public boolean add(Equipe equipe)
 	{
-//		if ( !this.enEquipe ){
-//			throw new RuntimeException();
-//		}
+		// TODO vérifier que la date de clôture n'est pas passée
+		if (!enEquipe)
+			throw new RuntimeException();
+		equipe.add(this);
+		return candidats.add(equipe);
+	}
 
-		if( this.inscriptionsOuvertes() ) {
-			equipe.add(this);
-			Boolean r = candidats.add(equipe);
+	/**
+	 * Retourne les personnes que l'on peut inscrire à cette competition.
+	 * @return les personnes que l'on peut inscrire à cette compétition.
+	 */
 
-			Application.saveEntity(this);
-			return r;
-		}
-		return false;
+	public Set<Personne> getPersonnesAInscrire()
+	{
+		// TODO retourner les personnes que l'on peut inscrire à cette compétition.
+		return null;
 	}
 
 	/**
@@ -171,7 +168,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		for (Candidat candidat : candidats)
 			remove(candidat);
-		inscriptions.remove(this);
+		inscriptions.delete(this);
 	}
 
 	@Override
