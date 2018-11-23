@@ -117,14 +117,14 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Personne personne)
 	{
 		if (enEquipe)
-			throw new RuntimeException();
+			throw new RuntimeException("Attention : Cette competition est reservé aux équipes");
 		if(inscriptionsOuvertes())
 		{
 			personne.add(this);
 			return candidats.add(personne);
 		}
 		else
-			throw new RuntimeException("Les inscriptions sont fini");
+			throw new RuntimeException("Attention : Les inscriptions sont fini");
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Equipe equipe)
 	{
 		if (!enEquipe)
-			throw new RuntimeException();
+			throw new RuntimeException("Attention : Cette competition est réservé aux personnes");
 		if(inscriptionsOuvertes())
 			equipe.add(this);
 		return candidats.add(equipe);
