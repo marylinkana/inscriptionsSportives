@@ -56,16 +56,16 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return
 	 */
 
-	public boolean inscriptionEstOuverte ()
+	public boolean inscriptionsOuvertes()
 	{
-		Date today =  Calendar.getInstance().getTime();
-
-		if(this.getDateCloture().before(today))
+		if(dateCloture.isAfter(LocalDate.now()))
 		{
-			return false;
+			return true;
 		}
-		return true;
+		else
+		return false;
 	}
+	
 
 	/**
 	 * Retourne la date de cloture des inscriptions.
