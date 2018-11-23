@@ -7,6 +7,8 @@ import java.time.Month;
 import java.util.Collections;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import inscriptions.Candidat;
@@ -16,18 +18,39 @@ import inscriptions.Personne;
 import inscriptions.Equipe;
 
 public class Personnetest {
+	
+	Inscriptions inscriptions ;
 
-	Inscriptions inscriptions = Inscriptions.getInscriptions();
-	
-	Personne personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
-	Personne personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
+    Personne personnetest ;
+    Personne personnetest2 ;
 
-	Competition competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
-	Competition competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+    Equipe equipetest; 
+    Equipe equipetest2;
+    
+    Competition competitiontest ;
+    Competition competitiontest2 ;
+   
 	
-	Equipe equipetest = inscriptions.createEquipe("nomequipetest");
-	Equipe equipetest2 = inscriptions.createEquipe("nomequipetest2");
-	
+	@Before
+    public void setUp() {
+		inscriptions = Inscriptions.getInscriptions();
+		
+		personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
+		personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
+
+		competitiontest = inscriptions.createCompetition("nomcompetitiontest",LocalDate.now().plusDays(30) , false);
+		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", LocalDate.now().plusDays(60), true);
+		
+		equipetest = inscriptions.createEquipe("nomequipetest");
+		equipetest2 = inscriptions.createEquipe("nomequipetest2");
+       
+    }
+
+    @After
+    public void tearDown() {
+        Inscriptions.getInscriptions().reinitialiser();
+    }
+    
 	@Test
 	public void testgetPrenom()
 	 {
@@ -56,9 +79,7 @@ public class Personnetest {
 	public void testsetMail()
 	 {
 		personnetest.setMail("mailsettest");
-		
-		String mailset = personnetest.getPrenom();
-		assertTrue(mailset.contains("mailsettest") );
+		assertEquals("mailsettest", personnetest.getMail());
 	 }
 	
 	@Test

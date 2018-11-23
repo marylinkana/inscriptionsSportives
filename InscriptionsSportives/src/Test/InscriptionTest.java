@@ -33,16 +33,16 @@ public class InscriptionTest {
 	
 	@Before
     public void setUp() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		inscriptions = Inscriptions.getInscriptions();
 		
-		Personne personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
-		Personne personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
+		personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
+		personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
 
-		Competition competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
-		Competition competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+		competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
+		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
 		
-		Equipe equipetest = inscriptions.createEquipe("nomequipetest");
-		Equipe equipetest2 = inscriptions.createEquipe("nomequipetest2");
+		equipetest = inscriptions.createEquipe("nomequipetest");
+		equipetest2 = inscriptions.createEquipe("nomequipetest2");
        
     }
 

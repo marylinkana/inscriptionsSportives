@@ -7,6 +7,8 @@ import java.time.Month;
 import java.util.Collections;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import inscriptions.Candidat;
@@ -16,21 +18,42 @@ import inscriptions.Personne;
 import inscriptions.Equipe;
 
 public class EquipeTest {
-	Inscriptions inscriptions = Inscriptions.getInscriptions();
 	
-	Personne personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
-	Personne personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
+	Inscriptions inscriptions ;
 
-	Competition competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
-	Competition competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+    Personne personnetest ;
+    Personne personnetest2 ;
+
+    Equipe equipetest; 
+    Equipe equipetest2;
+    
+    Competition competitiontest ;
+    Competition competitiontest2 ;
+   
 	
-	Equipe equipetest = inscriptions.createEquipe("nomequipetest");
-	Equipe equipetest2 = inscriptions.createEquipe("nomequipetest2");
-	
+	@Before
+    public void setUp() {
+		inscriptions = Inscriptions.getInscriptions();
+		
+		personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
+		personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
+
+		competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
+		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+		
+		equipetest = inscriptions.createEquipe("nomequipetest");
+		equipetest2 = inscriptions.createEquipe("nomequipetest2");
+       
+    }
+
+    @After
+    public void tearDown() {
+        Inscriptions.getInscriptions().reinitialiser();
+    }
 	@Test
 	public void testgetMembres() {
 		equipetest.add(personnetest);
-		assertEquals(personnetest, equipetest.getMembres());
+		assertTrue(equipetest.getMembres().contains(personnetest));
 	}
 	
 	@Test
@@ -57,8 +80,8 @@ public class EquipeTest {
 		competitiontest.add(personnetest2);
 		equipetest.add(personnetest2);
 		personnetest2.delete();
-		assertFalse(competitiontest.getCandidats().contains(personnetest2));
-		assertFalse(equipetest.getMembres().contains(personnetest2));
+		assertTrue(!competitiontest.getCandidats().contains(personnetest2));
+		assertTrue(!equipetest.getMembres().contains(personnetest2));
 	}
 	
 	

@@ -7,6 +7,8 @@ import java.time.Month;
 import java.util.Collections;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import inscriptions.Candidat;
@@ -18,24 +20,43 @@ import inscriptions.Equipe;
 
 public class CandidatTest {
 	
-	Inscriptions inscriptions = Inscriptions.getInscriptions();
-	
-	Personne personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
-	Personne personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
+	Inscriptions inscriptions ;
 
-	Competition competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
-	Competition competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+    Personne personnetest ;
+    Personne personnetest2 ;
+
+    Equipe equipetest; 
+    Equipe equipetest2;
+    
+    Competition competitiontest ;
+    Competition competitiontest2 ;
+   
 	
-	Equipe equipetest = inscriptions.createEquipe("nomequipetest");
-	Equipe equipetest2 = inscriptions.createEquipe("nomequipetest2");
-	
-	
-	
+	@Before
+    public void setUp() {
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		
+		personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
+		personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
+
+		competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
+		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+		
+		equipetest = inscriptions.createEquipe("nomequipetest");
+		equipetest2 = inscriptions.createEquipe("nomequipetest2");
+       
+    }
+
+    @After
+    public void tearDown() {
+        Inscriptions.getInscriptions().reinitialiser();
+    }
+    
 	@Test
 	public void testgetNom()
 	 {
 		String getNom = personnetest.getNom();
-		assertEquals("nomtest", getNom );
+		assertEquals("nomtest", getNom);
 	 }
 	
 	@Test
@@ -61,7 +82,6 @@ public class CandidatTest {
 	public void testdelate()
 	{
 		personnetest2.delete();
-		
 		assertTrue(!inscriptions.getCandidats().contains(personnetest2));
 	}
 	
