@@ -3,27 +3,18 @@
 
 APPLICATION JAVA
 
-3.1.a) Test Unitaire -> Marylin : en cours...
+3.1.a) Test Unitaire -> Marylin : 80% il manque testgetPersonnesAAjouter() & testgetCandidatsAInscrire()
 
-3.1.b) Competition.Java\TODO -> Antoine : en cours...
+3.1.b) Competition.Java\TODO -> Antoine : 90% il manque getCandidatsAInscrire()
 
-3.1.c) Equipe.java\TODO -> ...
+3.1.c) Equipe.java\TODO -> Antoine : 90% il manque getPersonnesAAjouter()
 
-3.1.d) Competition\EXCEPTION -> ...
-
-3.1.e) Equipe\EXCEPTION -> ...
-
-3.1.f) Inscription\EXCEPTION -> ...
-
-
-BASE DE DONNEE
-
-3.2) Modélisation de la base de données -> ...
+3.1.d) Competition\EXCEPTION -> Marylin 100%
 
 
 DOCUMENTATION
 
-3.3.1) MCD -> ...
+3.3.1) MCD ->  Marylin 100%
 
 3.3.2) Diagramme UML -> ...
 
