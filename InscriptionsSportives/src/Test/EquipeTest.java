@@ -38,8 +38,8 @@ public class EquipeTest {
 		personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
 		personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
 
-		competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
-		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+		competitiontest = inscriptions.createCompetition("nomcompetitiontest",LocalDate.now().plusDays(30), false);
+		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", LocalDate.now().plusDays(60), true);
 		
 		equipetest = inscriptions.createEquipe("nomequipetest");
 		equipetest2 = inscriptions.createEquipe("nomequipetest2");
@@ -65,20 +65,24 @@ public class EquipeTest {
 	@Test
 	public void remove() {
 		equipetest2.add(personnetest2);
+		assertTrue(equipetest2.getMembres().contains(personnetest2));
 		equipetest2.remove(personnetest2);
 		assertFalse(equipetest2.getMembres().contains(personnetest2));
 	}
 	
 //	@Test
 //	public void testgetPersonnesAAjouter() {
-//		equipetest.add(personnetest);
-//		assertTrue(!equipetest2.getPersonnesAAjouter().contains(personnetest));
+//		equipetest.add(personnetest2);
+//		inscriptions.remove(personnetest2);
+//		assertTrue(equipetest.getPersonnesAAjouter().contains(personnetest));
 //	}
 	
 	@Test
 	public void testdelete() {
 		competitiontest.add(personnetest2);
+		assertTrue(competitiontest.getCandidats().contains(personnetest2));
 		equipetest.add(personnetest2);
+		assertTrue(equipetest.getMembres().contains(personnetest2));
 		personnetest2.delete();
 		assertTrue(!competitiontest.getCandidats().contains(personnetest2));
 		assertTrue(!equipetest.getMembres().contains(personnetest2));

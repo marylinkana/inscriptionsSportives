@@ -39,8 +39,8 @@ public class CompetitionTest {
 		personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
 		personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
 
-		competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
-		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+		competitiontest = inscriptions.createCompetition("nomcompetitiontest",LocalDate.now().plusDays(30), false);
+		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", LocalDate.now().plusDays(60), true);
 		
 		equipetest = inscriptions.createEquipe("nomequipetest");
 		equipetest2 = inscriptions.createEquipe("nomequipetest2");
@@ -62,21 +62,21 @@ public class CompetitionTest {
 	public void testsetNomCompetition()
 	 {
 		competitiontest.setNom("setnomcompetitiontest");
-		
-		String setNom = competitiontest.getNom();
-		assertEquals("setnomcompetitiontest", setNom );
+		assertEquals("setnomcompetitiontest", competitiontest.getNom() );
 	 }
 	
 	@Test
 	public void testinscritionsOuverte()
 	{
 		assertEquals(true,competitiontest.inscriptionsOuvertes());
+		assertEquals(true,competitiontest2.inscriptionsOuvertes());
+
 	}
 	
 	@Test
 	public void testgetDateColture()
 	{
-		assertEquals(null,competitiontest.getDateCloture());
+		assertEquals(LocalDate.now().plusDays(30),competitiontest.getDateCloture());
 	}
 	
 	@Test
@@ -88,9 +88,8 @@ public class CompetitionTest {
 	@Test
 	public void testsetDateCloture()
 	{
-		LocalDate datetest = LocalDate.of(2014, Month.JANUARY, 1);
-		competitiontest.setDateCloture(datetest);
-		assertEquals(datetest,competitiontest.getDateCloture());
+		competitiontest.setDateCloture(LocalDate.now().plusDays(90));
+		assertEquals(LocalDate.now().plusDays(90),competitiontest.getDateCloture());
 	}
 	
 	@Test
@@ -104,8 +103,7 @@ public class CompetitionTest {
 	public void testaddpersonne()
 	{
 		competitiontest.add(personnetest2);
-//		assertTrue(competitiontest.getCandidats().contains(personnetest2));
-		assertEquals(personnetest2, competitiontest.getCandidats());
+		assertTrue(competitiontest.getCandidats().contains(personnetest2));
 
 	}
 	
@@ -119,7 +117,6 @@ public class CompetitionTest {
 //	@Test
 //	public void testgetCandidatsAInscrire() 
 //	{
-//		competitiontest.add(personnetest);
 //		assertTrue(!competitiontest.getCandidatsAInscrire().contains(personnetest));
 //	}
 	
@@ -135,8 +132,13 @@ public class CompetitionTest {
 	@Test
 	public void testdelete() {
 		competitiontest.add(personnetest2);
+		assertTrue(competitiontest.getCandidats().contains(personnetest2));
+		competitiontest2.add(equipetest2);
+		assertTrue(competitiontest2.getCandidats().contains(equipetest2));
 		competitiontest.delete();
 		assertFalse(personnetest2.getCompetitions().contains(competitiontest));
+		assertFalse(equipetest2.getCompetitions().contains(competitiontest));
+
 	}
 	
 	@Test

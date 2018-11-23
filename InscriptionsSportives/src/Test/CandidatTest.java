@@ -39,8 +39,8 @@ public class CandidatTest {
 		personnetest = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
 		personnetest2 = inscriptions.createPersonne("nomtest2", "prenomtest2", "mailtest2");
 
-		competitiontest = inscriptions.createCompetition("nomcompetitiontest",null, false);
-		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", null, true);
+		competitiontest = inscriptions.createCompetition("nomcompetitiontest",LocalDate.now().plusDays(30), false);
+		competitiontest2 = inscriptions.createCompetition("nomcompetitiontest2", LocalDate.now().plusDays(60), true);
 		
 		equipetest = inscriptions.createEquipe("nomequipetest");
 		equipetest2 = inscriptions.createEquipe("nomequipetest2");
@@ -79,17 +79,20 @@ public class CandidatTest {
 	}
 	
 	@Test
-	public void testdelate()
+	public void testdelete()
 	{
+		competitiontest.add(personnetest2);
+		equipetest.add(personnetest2);
 		personnetest2.delete();
-		assertTrue(!inscriptions.getCandidats().contains(personnetest2));
+		assertTrue(!equipetest.getMembres().contains(personnetest2));
+		assertTrue(!competitiontest.getCandidats().contains(personnetest2));
+
 	}
 	
 	@Test
 	public void testcompareTopersonne()
 	{
-		Personne personnetestbis = inscriptions.createPersonne("nomtest", "prenomtest", "mailtest");
-		assertEquals(0, personnetest.compareTo(personnetestbis) );
+		assertEquals(0, personnetest.compareTo(personnetest) );
 	}
 	
 	@Test
