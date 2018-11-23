@@ -5,9 +5,9 @@ APPLICATION JAVA
 
 3.1.a) Test Unitaire -> Marylin : 80% il manque testgetPersonnesAAjouter() & testgetCandidatsAInscrire()
 
-3.1.b) Competition.Java\TODO -> Antoine : 90% il manque getCandidatsAInscrire()
+3.1.b) Competition.Java\TODO -> Antoine : 90% il manque getCandidatsAInscrire() ligne 119
 
-3.1.c) Equipe.java\TODO -> Antoine : 90% il manque getPersonnesAAjouter()
+3.1.c) Equipe.java\TODO -> Antoine : 90% il manque getPersonnesAAjouter() ligne 62
 
 3.1.d) Competition\EXCEPTION -> Marylin 100%
 
