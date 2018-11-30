@@ -70,12 +70,11 @@ public class EquipeTest {
 		assertFalse(equipetest2.getMembres().contains(personnetest2));
 	}
 	
-//	@Test
-//	public void testgetPersonnesAAjouter() {
-//		equipetest.add(personnetest2);
-//		inscriptions.remove(personnetest2);
-//		assertTrue(equipetest.getPersonnesAAjouter().contains(personnetest));
-//	}
+	@Test
+	public void testgetPersonnesAAjouter() {
+		equipetest.add(personnetest2);
+		assertfalse(equipetest.getPersonnesAAjouter().contains(personnetest2));
+	}
 	
 	@Test
 	public void testdelete() {
