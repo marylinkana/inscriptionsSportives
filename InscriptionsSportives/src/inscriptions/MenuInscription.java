@@ -52,7 +52,7 @@ public class MenuInscription
 				}));
 		
 		candidatMenu.add(				
-				new Option("Modifier un candidat", "m", new Action()
+				new Option("Sélectionner un candidat", "m", new Action()
 				{
 					public void optionSelected()
 					{
@@ -70,7 +70,7 @@ public class MenuInscription
 				}));
 		
 		equipeMenu.add(				
-				new Option("Modifier une équipe", "m", new Action()
+				new Option("Sélectionner une équipe", "m", new Action()
 				{
 					public void optionSelected()
 					{
@@ -88,7 +88,7 @@ public class MenuInscription
 				}));
 		
 		competitionMenu.add(				
-				new Option("Modifier une competition", "M", new Action()
+				new Option("Sélectionner une competition", "M", new Action()
 				{
 					public void optionSelected()
 					{
