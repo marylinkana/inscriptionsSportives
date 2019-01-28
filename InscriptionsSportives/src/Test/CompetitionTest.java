@@ -138,6 +138,7 @@ public class CompetitionTest {
 		competitiontest.delete();
 		assertFalse(personnetest2.getCompetitions().contains(competitiontest));
 		assertFalse(equipetest2.getCompetitions().contains(competitiontest));
+		
 
 	}
 	

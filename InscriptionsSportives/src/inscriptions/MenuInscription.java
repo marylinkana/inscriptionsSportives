@@ -2,6 +2,7 @@ package inscriptions;
 
 import java.util.ArrayList;
 import commandLineMenus.*;
+import commandLineMenus.examples.ListOptions;
 import commandLineMenus.rendering.examples.util.InOut;
 
 public class MenuInscription
@@ -13,7 +14,7 @@ public class MenuInscription
 		
 		// Creates two options
 		//Option competitionOption = new Option("Competition", "C");
-		Menu candidatMenu = new Menu("Candidat Sub-Menu", "Candidat", "can");
+		Menu personneMenu = new Menu("Personne Sub-Menu", "Personne", "per");
 		Menu equipeMenu = new Menu("Equipe Sub-Menu", "Equipe", "equ");
 		Menu competitionMenu = new Menu("Competition Sub-Menu", "Competition", "com");
 		
@@ -22,7 +23,7 @@ public class MenuInscription
 		
 		// Adds the sub-menu sayHelloMenu to the rootMenu
 		// Please notice that since Menu extends Option, polymorphism allows us to pass the Menu sayHelloMenu where an Option was expected.
-		rootMenu.add(candidatMenu);
+		rootMenu.add(personneMenu);
 		rootMenu.add(equipeMenu);
 		rootMenu.add(competitionMenu);
 		
@@ -42,8 +43,8 @@ public class MenuInscription
 //		});
 //		
 		// Please notice that the action can be passed to the constructor of Option 
-		candidatMenu.add(				
-				new Option("Ajoute un candidat", "a", new Action()
+		personneMenu.add(				
+				new Option("Ajoute une personne", "a", new Action()
 				{
 					public void optionSelected()
 					{
@@ -51,17 +52,19 @@ public class MenuInscription
 					}
 				}));
 		
-		candidatMenu.add(				
-				new Option("Sélectionner un candidat", "m", new Action()
+		personneMenu.add(				
+				new Option("Sélectionner une personne", "s", new Action()
 				{
 					public void optionSelected()
 					{
 						System.out.println("Liste des candidat : ");
+						
+						
 					}
 				}));
 		 	
 		equipeMenu.add(				
-				new Option("Ajoute une équipe", "A", new Action()
+				new Option("Ajoute une équipe", "a", new Action()
 				{
 					public void optionSelected()
 					{
@@ -70,11 +73,16 @@ public class MenuInscription
 				}));
 		
 		equipeMenu.add(				
-				new Option("Sélectionner une équipe", "m", new Action()
+				new Option("Sélectionner une équipe", "s", new Action()
 				{
 					public void optionSelected()
 					{
-						System.out.println("Liste des équipes : ");
+//						System.out.println("Liste des équipes : ");
+						java.util.List<String> equipe = new ArrayList<>();
+						equipe.add("Amandine");
+						equipe.add("Yann");
+						equipe.add("Cefkan");
+						
 					}
 				}));
 		
@@ -83,12 +91,12 @@ public class MenuInscription
 				{
 					public void optionSelected()
 					{
-						System.out.println("v ");
+						System.out.println("fonction pour ajouter une competition ");
 					}
 				}));
 		
 		competitionMenu.add(				
-				new Option("Sélectionner une competition", "M", new Action()
+				new Option(" Sélectionnez une competition", "s", new Action()
 				{
 					public void optionSelected()
 					{
@@ -97,12 +105,12 @@ public class MenuInscription
 				}));
 		
 		// Adds an option to go back to the rootMenu
-		candidatMenu.addBack("r");
+		personneMenu.addBack("r");
 		equipeMenu.addBack("r");
 		competitionMenu.addBack("r");
 		
 		// Once an option has been selected in sayHelloMenu, and the associated action is done, we will automatically go back to the rootMenu. 
-		candidatMenu.setAutoBack(true);
+		personneMenu.setAutoBack(true);
 		equipeMenu.setAutoBack(true);
 		competitionMenu.setAutoBack(true);
 		
