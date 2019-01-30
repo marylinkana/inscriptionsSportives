@@ -1,4 +1,4 @@
-package inscriptions.Demineur;
+package Demineur;
 
 
 import java.io.* ;
