@@ -11,12 +11,12 @@ public class EntreesUsers {
 	        {
 	        try
 	            {
-	            System.out.println("Entrez un nombre de lignes") ;
+	            System.out.println("Entrez un nombre de ligne") ;
 	            ligne = Integer.parseInt(in.readLine()) + 2 ;
 	            }
 	        catch (NumberFormatException e)
 	            {
-	            System.out.println("\nVeuillez entrer un entier pour le nombre de lignes\n");
+	            System.out.println("\nVeuillez entrer un entier pour le nombre de ligne\n");
 	            erreur = true ;    
 	            }            
 	        }
@@ -31,12 +31,12 @@ public class EntreesUsers {
 	        {
 	        try
 	            {            
-	            System.out.println("\nEntrez un nombre de colonnes") ;
+	            System.out.println("\nEntrez un nombre de colonne") ;
 	            colonne = Integer.parseInt(in.readLine()) + 2;            
 	            }
 	        catch (NumberFormatException e)
 	            {
-	            System.out.println("\nVeuillez entrer un entier pour le nombre de lignes\n");
+	            System.out.println("\nVeuillez entrer un entier pour le nombre de colonne\n");
 	            erreur = true ;    
 	            }
 	        }
@@ -53,12 +53,12 @@ public class EntreesUsers {
 	        {
 	        try
 	            {
-	            System.out.println("\nEntrez un nombre de mines a decouvrire") ;
+	            System.out.println("\nEntrez un nombre de mines à decouvrir") ;
 	            nbMine = Integer.parseInt(in.readLine()) ;
 	            }
 	        catch (NumberFormatException e)
 	            {
-	            System.out.println("\nVeuillez entrer un entier pour le nombre de mines a decouvrire\n");
+	            System.out.println("\nVeuillez entrer un entier pour le nombre de mines à decouvrir\n");
 	            erreur = true ;    
 	            }                
 	        }

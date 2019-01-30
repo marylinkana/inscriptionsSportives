@@ -33,9 +33,9 @@ public class Jeux {
 	  
 	    
 	    // Entrés Utilisateur
-	    FonctionEU.ligne(erreur, in, ligne );
-	    FonctionEU.colonne(erreur, in, ligne, colonne );
-	    FonctionEU.nbMine(nbMine, erreur, in, ligne, colonne );
+	    ligne = FonctionEU.ligne(erreur, in, ligne );
+	    colonne = FonctionEU.colonne(erreur, in, ligne, colonne );
+	    nbMine = FonctionEU.nbMine(nbMine, erreur, in, ligne, colonne );
 
 	  //Initialise la grille avec le tour en plus, 2 lignes et 2 colonnes   
 	    int grille[][] = new int[ligne][colonne] ;
@@ -44,14 +44,14 @@ public class Jeux {
 	    int randColonne = 0 ;
 	    
 		//Par rapport aux nombres de Mines, l'ordi les places alléatoirement dans la grille
-	    FonctionMines.positionRandomMine(randColonne,randLigne, grilleCachee, grille, ligne, colonne, nbMine);
+	    grille = FonctionMines.positionRandomMine(randColonne,randLigne, grilleCachee, grille, ligne, colonne, nbMine);
 	    
 	    //Place des numéros qui indiquent le nombre de mines à proximité
-	    FonctionMines.indicMines(ligne, colonne, grille);
+	    grille = FonctionMines.indicMines(ligne, colonne, grille);
 
 	   
 	   //Créer des caches dans le tableau, Créer les numéros des cases autour du tableau, Remplace les 00 par des doubles espaces    
-	   FonctionTableau.GestionTab(ligne, colonne, grilleCachee, nbre);
+	   grilleCachee = FonctionTableau.GestionTab(ligne, colonne, grilleCachee, nbre);
 	    
 	   //Affiche le tableau
 	   FonctionGrille.getGrille(colonne, ligne, grilleCachee) ;    
@@ -69,7 +69,7 @@ public class Jeux {
 	        
 	        
 	     //Gestion des bombes et arret de jeux
-	    FonctionMines.GameOver(ligneDevoilee, colonneDevoilee, grille, stop, nbMine, compteur, ligne, colonne);
+	    stop = FonctionMines.GameOver(ligneDevoilee, colonneDevoilee, grille, stop, nbMine, compteur, ligne, colonne);
 	 
 
 	    }
