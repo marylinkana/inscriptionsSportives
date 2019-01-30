@@ -15,6 +15,7 @@ public class Jeux {
 	    Mines FonctionMines = new Mines();
 	    EntreesUsers FonctionEU = new EntreesUsers();
 	    Tableau FonctionTableau = new Tableau();
+	    Fin FonctionFin = new Fin();
 	    
 	    int compteur = 0 ;
 	    int stop = 0 ;
@@ -69,7 +70,7 @@ public class Jeux {
 	        
 	        
 	     //Gestion des bombes et arret de jeux
-	    stop = FonctionMines.GameOver(ligneDevoilee, colonneDevoilee, grille, stop, nbMine, compteur, ligne, colonne);
+	    stop = FonctionFin.GameOver(ligneDevoilee, colonneDevoilee, grille, stop, nbMine, compteur, ligne, colonne);
 	 
 
 	    }
