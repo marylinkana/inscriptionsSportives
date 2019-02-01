@@ -20,16 +20,16 @@ import inscriptions.Equipe;
 
 public class CandidatTest {
 	
-	Inscriptions inscriptions ;
+	Inscriptions inscriptions;
 
-    Personne personnetest ;
-    Personne personnetest2 ;
+    Personne personnetest;
+    Personne personnetest2;
 
     Equipe equipetest; 
     Equipe equipetest2;
     
-    Competition competitiontest ;
-    Competition competitiontest2 ;
+    Competition competitiontest;
+    Competition competitiontest2;
    
 	
 	@Before
