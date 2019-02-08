@@ -18,7 +18,7 @@ public class MenuInscription
 		
 		// Creates two options
 		//Option competitionOption = new Option("Competition", "C");
-		Menu personneMenu = new Menu("Personne Sub-Menu", "Personne", "per");
+		Menu inscriptionMenu = new Menu("Inscription Sub-Menu", "Inscription", "ins");
 		Menu equipeMenu = new Menu("Equipe Sub-Menu", "Equipe", "equ");
 		Menu competitionMenu = new Menu("Competition Sub-Menu", "Competition", "com");
 		
@@ -27,7 +27,7 @@ public class MenuInscription
 		
 		// Adds the sub-menu sayHelloMenu to the rootMenu
 		// Please notice that since Menu extends Option, polymorphism allows us to pass the Menu sayHelloMenu where an Option was expected.
-		rootMenu.add(personneMenu);
+		rootMenu.add(inscriptionMenu);
 		rootMenu.add(equipeMenu);
 		rootMenu.add(competitionMenu);
 		
@@ -47,47 +47,45 @@ public class MenuInscription
 //		});
 //		
 		// Please notice that the action can be passed to the constructor of Option 
-		personneMenu.add(				
-				new Option("Ajoute une personne", "a", new Action()
+		
+		inscriptionMenu.add(				
+				new Option("Afficher les Inscriptions", "afinsc", new Action()
 				{
 					public void optionSelected()
 					{
-						System.out.println("Enter le nom, le prenom et l'adresse email de la personne que vous voulez ajouter ");
-						String nom = InOut.getString("Nom : ");
-						String prenom = InOut.getString("Prénom : ");
-                        String mail = InOut.getString("Email : ");
+						System.out.println("Liste des inscriptions : ");
                 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-                        Personne personne = inscriptions.createPersonne(nom, prenom, mail);
+						Inscriptions lesInscriptions = Inscriptions.getInscriptions();
+						System.out.println( lesInscriptions );
 					}
 				}));
 		
-		personneMenu.add(				
-				new Option("Sélectionner une personne", "s", new Action()
+		inscriptionMenu.add(				
+				new Option("Afficher les Competitions", "afcomp", new Action()
 				{
 					public void optionSelected()
 					{
-						System.out.println("Liste des candidat : ");
+						System.out.println("Liste des competition : ");
                 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-						SortedSet<Personne> lesCandidats = inscriptions.getPersonnes();
+						SortedSet<Competition> lesCompetitions = inscriptions.getCompetitions();
+						System.out.println( lesCompetitions );
+					}
+				}));
+		
+		inscriptionMenu.add(				
+				new Option("Afficher le Candidats", "afcand", new Action()
+				{
+					public void optionSelected()
+					{
+						System.out.println("Liste des candidats : ");
+                		Inscriptions inscriptions = Inscriptions.getInscriptions();
+						SortedSet<Candidat> lesCandidats = inscriptions.getCandidats();
 						System.out.println( lesCandidats );
-						
-					}
-				}));
-		 	
-		equipeMenu.add(				
-				new Option("Ajoute une équipe", "a", new Action()
-				{
-					public void optionSelected()
-					{
-						System.out.println("Enter le nom de l'équipe à ajouter ");
-						String nom = InOut.getString("Nom : ");
-                		Inscriptions inscriptions = Inscriptions.getInscriptions();
-                        Equipe equipe = inscriptions.createEquipe(nom);
 					}
 				}));
 		
 		equipeMenu.add(				
-				new Option("Sélectionner une équipe", "s", new Action()
+				new Option("Afficher les équipes", "afequi", new Action()
 				{
 					public void optionSelected()
 					{
@@ -99,8 +97,21 @@ public class MenuInscription
 					}
 				}));
 		
-		competitionMenu.add(				
-				new Option("Ajoute une competition", "a", new Action()
+		inscriptionMenu.add(				
+				new Option("Afficher les personnes", "afpers", new Action()
+				{
+					public void optionSelected()
+					{
+						System.out.println("Liste des personnes : ");
+                		Inscriptions inscriptions = Inscriptions.getInscriptions();
+						SortedSet<Personne> lesPersonnes = inscriptions.getPersonnes();
+						System.out.println( lesPersonnes );
+						
+					}
+				}));
+		
+		inscriptionMenu.add(				
+				new Option("Créer une competition", "crcomp", new Action()
 				{
 					public void optionSelected()
 					{
@@ -117,25 +128,42 @@ public class MenuInscription
 					}
 				}));
 		
-		competitionMenu.add(				
-				new Option(" Sélectionnez une competition", "s", new Action()
+		
+		
+		inscriptionMenu.add(				
+				new Option("Créer une équipe", "crequi", new Action()
 				{
 					public void optionSelected()
 					{
-						System.out.println("Liste des competition : ");
-						Inscriptions inscriptions = Inscriptions.getInscriptions();
-						SortedSet<Competition> lesCompetitions = inscriptions.getCompetitions();
-						System.out.println( lesCompetitions );
+						System.out.println("Enter le nom de l'équipe à ajouter ");
+						String nom = InOut.getString("Nom : ");
+                		Inscriptions inscriptions = Inscriptions.getInscriptions();
+                        Equipe equipe = inscriptions.createEquipe(nom);
 					}
 				}));
 		
+		inscriptionMenu.add(				
+				new Option("créer une personne", "crpers", new Action()
+				{
+					public void optionSelected()
+					{
+						System.out.println("Enter le nom, le prenom et l'adresse email de la personne que vous voulez ajouter ");
+						String nom = InOut.getString("Nom : ");
+						String prenom = InOut.getString("Prénom : ");
+                        String mail = InOut.getString("Email : ");
+                		Inscriptions inscriptions = Inscriptions.getInscriptions();
+                        Personne personne = inscriptions.createPersonne(nom, prenom, mail);
+					}
+				}));
+		
+		
 		// Adds an option to go back to the rootMenu
-		personneMenu.addBack("r");
+		inscriptionMenu.addBack("r");
 		equipeMenu.addBack("r");
 		competitionMenu.addBack("r");
 		
 		// Once an option has been selected in sayHelloMenu, and the associated action is done, we will automatically go back to the rootMenu. 
-		personneMenu.setAutoBack(true);
+		inscriptionMenu.setAutoBack(true);
 		equipeMenu.setAutoBack(true);
 		competitionMenu.setAutoBack(true);
 		
