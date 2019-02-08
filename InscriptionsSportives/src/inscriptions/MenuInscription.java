@@ -1,6 +1,10 @@
 package inscriptions;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.SortedSet;
+
 import commandLineMenus.*;
 import commandLineMenus.examples.ListOptions;
 import commandLineMenus.rendering.examples.util.InOut;
@@ -48,7 +52,12 @@ public class MenuInscription
 				{
 					public void optionSelected()
 					{
-						System.out.println("fonction pour ajouter un candidat ");
+						System.out.println("Enter le nom, le prenom et l'adresse email de la personne que vous voulez ajouter ");
+						String nom = InOut.getString("Nom : ");
+						String prenom = InOut.getString("Prénom : ");
+                        String mail = InOut.getString("Email : ");
+                		Inscriptions inscriptions = Inscriptions.getInscriptions();
+                        Personne personne = inscriptions.createPersonne(nom, prenom, mail);
 					}
 				}));
 		
@@ -58,7 +67,9 @@ public class MenuInscription
 					public void optionSelected()
 					{
 						System.out.println("Liste des candidat : ");
-						
+                		Inscriptions inscriptions = Inscriptions.getInscriptions();
+						SortedSet<Personne> lesCandidats = inscriptions.getPersonnes();
+						System.out.println( lesCandidats );
 						
 					}
 				}));
@@ -68,7 +79,10 @@ public class MenuInscription
 				{
 					public void optionSelected()
 					{
-						System.out.println("fonction pour ajouter une equipe ");
+						System.out.println("Enter le nom de l'équipe à ajouter ");
+						String nom = InOut.getString("Nom : ");
+                		Inscriptions inscriptions = Inscriptions.getInscriptions();
+                        Equipe equipe = inscriptions.createEquipe(nom);
 					}
 				}));
 		
@@ -77,11 +91,10 @@ public class MenuInscription
 				{
 					public void optionSelected()
 					{
-//						System.out.println("Liste des équipes : ");
-						java.util.List<String> equipe = new ArrayList<>();
-						equipe.add("Amandine");
-						equipe.add("Yann");
-						equipe.add("Cefkan");
+						System.out.println("Liste des équipes : ");
+						Inscriptions inscriptions = Inscriptions.getInscriptions();
+						SortedSet<Equipe> lesEquipes = inscriptions.getEquipes();
+						System.out.println( lesEquipes );
 						
 					}
 				}));
@@ -91,7 +104,16 @@ public class MenuInscription
 				{
 					public void optionSelected()
 					{
-						System.out.println("fonction pour ajouter une competition ");
+						System.out.println("Enter le nom, le nombre de jour jusqu'a la ate de cloture puis true si la competition est en équipe ou sinon false  ");
+						String nom = InOut.getString("Nom : ");
+						System.out.print("enEquipe :");
+						Scanner scanner = new Scanner(System.in);
+				        int day = scanner.nextInt();
+				        LocalDate date = LocalDate.now().plusDays(day);
+						System.out.print("enEquipe :");
+				        boolean enEquipe = scanner.nextBoolean();
+                		Inscriptions inscriptions = Inscriptions.getInscriptions();
+                        Competition competition = inscriptions.createCompetition(nom, date, enEquipe);
 					}
 				}));
 		
@@ -101,6 +123,9 @@ public class MenuInscription
 					public void optionSelected()
 					{
 						System.out.println("Liste des competition : ");
+						Inscriptions inscriptions = Inscriptions.getInscriptions();
+						SortedSet<Competition> lesCompetitions = inscriptions.getCompetitions();
+						System.out.println( lesCompetitions );
 					}
 				}));
 		
