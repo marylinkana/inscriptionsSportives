@@ -1,3 +1,6 @@
-/bin
-Inscriptions.srz
-**~
+
+*.xml
+*.xml
+.idea/workspace.xml
+*.xml
+/bin/
