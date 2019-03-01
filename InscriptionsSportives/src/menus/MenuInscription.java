@@ -1,6 +1,7 @@
 package menus;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.SortedSet;
@@ -8,137 +9,296 @@ import java.util.SortedSet;
 import commandLineMenus.*;
 import commandLineMenus.examples.ListOptions;
 import commandLineMenus.rendering.examples.util.InOut;
-import inscriptions.Candidat;
-import inscriptions.Competition;
-import inscriptions.Equipe;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
+import inscriptions.*;
 
 public class MenuInscription
 {
-	public MenuInscription()
+	private Menu getCompetitionMenu()
 	{
-		// Creates the root menu of the application
+		Menu competitionMenu = new Menu("Competition Sub-Menu", "competition", "com");
+		competitionMenu.add(getCompetitionList());
+		competitionMenu.add(creerCompetitionOption());
+		competitionMenu.addBack("r");
+
+		return competitionMenu;
+	}
+	
+	private Menu getEquipeMenu()
+	{
+		Menu equipeMenu = new Menu("Equipe Sub-Menu", "Equipe", "equ");
+		equipeMenu.add(getEquipeList());
+		equipeMenu.add(creerEquipeOption());
+		equipeMenu.addBack("r");
+
+		return equipeMenu;
+	}
+	
+	private Menu getPersonneMenu()
+	{
+		Menu personneMenu = new Menu("Personne Sub-Menu", "Personne", "per");
+		personneMenu.add(getPersonneList());
+		personneMenu.add(creerPersonneOption());
+		personneMenu.addBack("r");
+
+		return personneMenu;
+	}
+	
+	public MenuInscription(Inscriptions inscriptions)
+	{
+		this.inscriptions = inscriptions;
+
+		
 		Menu rootMenu = new Menu("Root Menu");
 		
-		// Creates two options
-		//Option competitionOption = new Option("Competition", "C");
-		Menu inscriptionMenu = new Menu("Inscription Sub-Menu", "Inscription", "ins");
-		
-		// Adds an option to the rootMenu 
-		//rootMenu.add(competitionOption);
-		
-		// Adds the sub-menu sayHelloMenu to the rootMenu
-		// Please notice that since Menu extends Option, polymorphism allows us to pass the Menu sayHelloMenu where an Option was expected.
-		rootMenu.add(inscriptionMenu);
-
-		
-		// Adds the quit option
+		rootMenu.add(getCompetitionMenu());
+		rootMenu.add(getEquipeMenu());
+		rootMenu.add(getPersonneMenu());
 		rootMenu.addQuit("q");
 		
-		// Defines the action that will be triggered if the calculator is selected.
-//		competitionOption.setAction(new Action()
-//		{
-//			// Method triggered if the calculatorOption is selected 
-//			public void optionSelected()
-//			{
-//				int a = InOut.getInt("Input the first operand : "),
-//						b = InOut.getInt("Input the second operand : ");
-//				System.out.println("" + a + " + " + b + " = " + (a+b));
-//			}
-//		});
-//		
-		// Please notice that the action can be passed to the constructor of Option 
-		
-		inscriptionMenu.add(afficherInscriptionOption());
-		
-		inscriptionMenu.add(afficherCompetitionOption());
-		
-		inscriptionMenu.add(afficherCandidatOption());
-		
-		inscriptionMenu.add(afficheEquipeOption());
-		
-		inscriptionMenu.add(affichePersonneOption());
-		
-		inscriptionMenu.add(creerCompetitionOption());
-		
-		inscriptionMenu.add(creerEquipeOption());
-		
-		inscriptionMenu.add(creerPersonneOption());
-		
-		
-		// Adds an option to go back to the rootMenu
-		inscriptionMenu.addBack("r");
-
-		
-		// Once an option has been selected in sayHelloMenu, and the associated action is done, we will automatically go back to the rootMenu. 
-		inscriptionMenu.setAutoBack(true);
-
 		rootMenu.start();
+
 	}
 	
-	private static  Option afficherInscriptionOption() {
-		return new Option("Afficher les Inscriptions", "afinsc", new Action()
+
+	private Inscriptions inscriptions;
+	
+	void CompetitionListOptions()
+	{
+		List<Competition> list = getCompetitionList();
+		list.start();
+	}
+	
+    // Returns the list to print
+	private List<Competition> getCompetitionList()
+	{
+		List<Competition> liste = new List<>("Select competition", "s", 
+				getListDataCompetition(),
+				getOptionListCompetition());
+		liste.setAutoBack(false);
+		liste.addQuit("q");
+		return liste;
+	}
+	
+	private ListData<Competition> getListDataCompetition()
+	{
+		return new ListData<Competition>()
 		{
+			@Override
+			public java.util.List<Competition> getList()
+			{
+				return new ArrayList<>(inscriptions.getCompetitions());
+			}
+		};
+	}
+	
+	private ListOption<Competition> getOptionListCompetition()
+	{
+		return new ListOption<Competition>()
+		{
+			// Each person will become an option
+			// The following method returns the option 
+			// associated with each one. 
+			public Option getOption(Competition competition)
+			{
+				return getCompetitionMenu(competition);
+			}
+		};
+	}
+	
+	// Creates an sub-menu for someone. 
+	private Option getCompetitionMenu(final Competition competition)
+	{
+		Menu competitionMenu = new Menu("Edit " + competition.getNom(), competition.getNom(), null);
+		competitionMenu.add(afficheCompetition(competition));
+		competitionMenu.add(supprimeCompetition(competition));
+		competitionMenu.setAutoBack(true);
+		return competitionMenu;
+	}
+	
+	// Returns the option to display someone
+	private Option afficheCompetition(Competition competition)
+	{
+		return new Option("show", "s", new Action()
+		{
+			@Override
 			public void optionSelected()
 			{
-				System.out.println("Liste des inscriptions : ");
-				Inscriptions lesInscriptions = Inscriptions.getInscriptions();
-				System.out.println( lesInscriptions );
+				System.out.println("You must give the man a name : " + competition + ".");
 			}
 		});
 	}
 	
-	private static  Option afficherCompetitionOption() {
-		return new Option("Afficher les Competitions", "afcomp", new Action()
+	private static Option supprimeCompetition(Competition competition)
+	{
+		return new Option("delete", "d", new Action()
 		{
+			@Override
 			public void optionSelected()
 			{
-				System.out.println("Liste des competition : ");
-        		Inscriptions inscriptions = Inscriptions.getInscriptions();
-				SortedSet<Competition> lesCompetitions = inscriptions.getCompetitions();
-				System.out.println( lesCompetitions );
+				competition.delete();
+				System.out.println(competition + " has been deleted.");
 			}
 		});
 	}
 	
-	private static  Option afficherCandidatOption() {
-		return new Option("Afficher le Candidats", "afcand", new Action()
+	
+	
+	
+	void PersonneListOptions()
+	{
+		List<Personne> list = getPersonneList();
+		list.start();
+	}
+	
+    // Returns the list to print
+	private List<Personne> getPersonneList()
+	{
+		List<Personne> liste = new List<>("Select personne", "s",
+				getListPersonne(),
+				getOptionListPersonne());
+		liste.setAutoBack(false);
+		liste.addQuit("q");
+		return liste;
+	}
+	
+	private ListData<Personne> getListPersonne()
+	{
+		return new ListData<Personne>()
 		{
+			@Override
+			public java.util.List<Personne> getList()
+			{
+				return new ArrayList<>(inscriptions.getPersonnes());
+			}
+		};
+	}
+	
+	private ListOption<Personne> getOptionListPersonne()
+	{
+		return new ListOption<Personne>()
+		{
+			// Each person will become an option
+			// The following method returns the option 
+			// associated with each one. 
+			public Option getOption(Personne personne)
+			{
+				return getPersonneMenu(personne);
+			}
+		};
+	}
+	
+	// Creates an sub-menu for someone. 
+	private Option getPersonneMenu(final Personne personne)
+	{
+		Menu personneMenu = new Menu("Edit " + personne.getPrenom(), personne.getPrenom(), null);
+		personneMenu.add(affichePersonne(personne));
+		personneMenu.add(supprimePersonne(personne));
+		personneMenu.setAutoBack(true);
+		return personneMenu;
+	}
+	
+	// Returns the option to display someone
+	private Option affichePersonne(Personne personne)
+	{
+		return new Option("show", "s", new Action()
+		{
+			@Override
 			public void optionSelected()
 			{
-				System.out.println("Liste des candidats : ");
-        		Inscriptions inscriptions = Inscriptions.getInscriptions();
-				SortedSet<Candidat> lesCandidats = inscriptions.getCandidats();
-				System.out.println( lesCandidats );
+				System.out.println("You must give the man a name : " + personne + ".");
 			}
 		});
 	}
 	
-	private static  Option afficheEquipeOption() {
-		return new Option("Afficher les équipes", "afequi", new Action()
+	private static Option supprimePersonne(Personne personne)
+	{
+		return new Option("delete", "d", new Action()
 		{
+			@Override
 			public void optionSelected()
 			{
-				System.out.println("Liste des équipes : ");
-				Inscriptions inscriptions = Inscriptions.getInscriptions();
-				SortedSet<Equipe> lesEquipes = inscriptions.getEquipes();
-				System.out.println( lesEquipes );
-				
+				personne.delete();
+				System.out.println(personne + " has been deleted.");
 			}
 		});
 	}
 	
-	private static  Option affichePersonneOption() {
-		return new Option("Afficher les personnes", "afpers", new Action()
+	
+	void EquipeListOptions()
+	{
+		List<Personne> list = getPersonneList();
+		list.start();
+	}
+	
+    // Returns the list to print
+	private List<Equipe> getEquipeList()
+	{
+		List<Equipe> liste = new List<>("Select equipe", "s",
+				getListEquipe(),
+				getOptionListEquipe());
+		liste.setAutoBack(false);
+		liste.addQuit("q");
+		return liste;
+	}
+	
+	private ListData<Equipe> getListEquipe()
+	{
+		return new ListData<Equipe>()
 		{
+			@Override
+			public java.util.List<Equipe> getList()
+			{
+				return new ArrayList<>(inscriptions.getEquipes());
+			}
+		};
+	}
+	
+	private ListOption<Equipe> getOptionListEquipe()
+	{
+		return new ListOption<Equipe>()
+		{
+			// Each person will become an option
+			// The following method returns the option 
+			// associated with each one. 
+			public Option getOption(Equipe equipe)
+			{
+				return getEquipeMenu(equipe);
+			}
+		};
+	}
+	
+	// Creates an sub-menu for someone. 
+	private Option getEquipeMenu(final Equipe equipe)
+	{
+		Menu equipeMenu = new Menu("Edit " + equipe.getNom(), equipe.getNom(), null);
+		equipeMenu.add(afficheEquipe(equipe));
+		equipeMenu.add(supprimeEquipe(equipe));
+		equipeMenu.setAutoBack(true);
+		return equipeMenu;
+	}
+	
+	// Returns the option to display someone
+	private Option afficheEquipe(Equipe equipe)
+	{
+		return new Option("show", "s", new Action()
+		{
+			@Override
 			public void optionSelected()
 			{
-				System.out.println("Liste des personnes : ");
-        		Inscriptions inscriptions = Inscriptions.getInscriptions();
-				SortedSet<Personne> lesPersonnes = inscriptions.getPersonnes();
-				System.out.println( lesPersonnes );
-				
+				System.out.println("You must give the man a name : " + equipe + ".");
+			}
+		});
+	}
+	
+	private static Option supprimeEquipe(Equipe equipe)
+	{
+		return new Option("delete", "d", new Action()
+		{
+			@Override
+			public void optionSelected()
+			{
+				equipe.delete();
+				System.out.println(equipe + " has been deleted.");
 			}
 		});
 	}
@@ -150,7 +310,7 @@ public class MenuInscription
 			{
 				System.out.println("Enter le nom, le nombre de jour jusqu'a la ate de cloture puis true si la competition est en équipe ou sinon false  ");
 				String nom = InOut.getString("Nom : ");
-				System.out.print("enEquipe :");
+				System.out.print("nombre de jour :");
 				Scanner scanner = new Scanner(System.in);
 		        int day = scanner.nextInt();
 		        LocalDate date = LocalDate.now().plusDays(day);
@@ -189,5 +349,8 @@ public class MenuInscription
 			}
 		});
 	}
+	
+
 
 }
+
