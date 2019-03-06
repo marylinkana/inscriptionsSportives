@@ -64,20 +64,86 @@ public class MenuPersonne {
 	{
 		Menu personneMenu = new Menu("Edit " + personne.getPrenom(), personne.getPrenom(), null);
 		personneMenu.add(affichePersonne(personne));
+		personneMenu.add(afficheEquipePersonne(personne));
+		personneMenu.add(setNomPersonne(personne));
+		personneMenu.add(setPrenomPersonne(personne));
+		personneMenu.add(setMailPersonne(personne));
 		personneMenu.add(supprimePersonne(personne));
 		personneMenu.setAutoBack(true);
 		return personneMenu;
 	}
 	
+	private static Option setNomPersonne(Personne personne) {
+		return new Option("set Nom", "stn", new Action()
+				
+				{
+					@Override
+					public void optionSelected()
+					{
+						System.out.println("veillez saisir le nouveau nom");
+						String nom = InOut.getString("Nom : ");
+						personne.setNom(nom);
+						System.out.println("le nom a bien été changé");
+					}
+				});
+	}
+	
+	private static Option setPrenomPersonne(Personne personne) {
+		return new Option("set Prenom", "stp", new Action()
+				
+				{
+					@Override
+					public void optionSelected()
+					{
+						System.out.println("veillez saisir le nouveau nom");
+						String prenom = InOut.getString("Nom : ");
+						personne.setPrenom(prenom);
+						System.out.println("le prénom a bien été changé");
+					}
+				});
+	}
+	
+	private static Option setMailPersonne(Personne personne) {
+		return new Option("set Prenom", "stm", new Action()
+				
+				{
+					@Override
+					public void optionSelected()
+					{
+						System.out.println("veillez saisir le nouveau nom");
+						String mail = InOut.getString("Nom : ");
+						personne.setMail(mail);
+						System.out.println("le mail a bien été changé");
+					}
+				});
+	}
+	
+	private static Option afficheEquipePersonne(Personne personne) {
+		return new Option("show groupe", "shg", new Action()
+				
+				{
+					@Override
+					public void optionSelected()
+					{
+						System.out.println("Equipe : " + personne.getEquipes() + ".");
+						System.out.println("competition : " + personne.getCompetitions() + ".");
+
+					}
+				});
+	}
+
 	// Returns the option to display someone
 	private static Option affichePersonne(Personne personne)
 	{
-		return new Option("show", "s", new Action()
+		return new Option("show", "sh", new Action()
+		
 		{
 			@Override
 			public void optionSelected()
 			{
-				System.out.println("You must give the man a name : " + personne + ".");
+				System.out.println("You must give the man a name : " + personne.getNom() + ".");
+				System.out.println("You must give the man a prenom : " + personne.getPrenom() + ".");
+				System.out.println("You must give the man a mail : " + personne.getMail() + ".");
 			}
 		});
 	}

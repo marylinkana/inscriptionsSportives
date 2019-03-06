@@ -3,6 +3,7 @@ package menus;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.SortedSet;
 
 import commandLineMenus.Action;
@@ -14,7 +15,9 @@ import commandLineMenus.Option;
 import commandLineMenus.rendering.examples.util.InOut;
 import inscriptions.Candidat;
 import inscriptions.Competition;
+import inscriptions.Equipe;
 import inscriptions.Inscriptions;
+import inscriptions.Personne;
 
 public class MenuCompetition {
 	
@@ -52,9 +55,6 @@ public class MenuCompetition {
 	{
 		return new ListOption<Competition>()
 		{
-			// Each person will become an option
-			// The following method returns the option 
-			// associated with each one. 
 			public Option getOption(Competition competition)
 			{
 				return getCompetitionMenu(competition);
@@ -67,10 +67,10 @@ public class MenuCompetition {
 	{
 		Menu competitionMenu = new Menu("Edit " + competition.getNom(), competition.getNom(), null);
 		competitionMenu.add(afficheCompetition(competition));
+		competitionMenu.add(afficheCandidatCompetition(competition));
 		competitionMenu.add(supprimeCompetition(competition));
 		competitionMenu.add(modifieNomCompetition(competition));
 		competitionMenu.add(modifieDateCompetition(competition));
-		competitionMenu.add(ajoutePersonneCompetition(competition));
 		competitionMenu.setAutoBack(true);
 		competitionMenu.addBack("r");
 		return competitionMenu;
@@ -98,6 +98,34 @@ public class MenuCompetition {
 		});
 	}
 	
+	private static Option afficheCandidatCompetition(Competition competition)
+	{
+		return new Option("show", "sh", new Action()
+		{
+			@Override
+			public void optionSelected()
+			{
+				System.out.println("Candidats : ");
+				System.out.println(competition.getCandidats());
+				
+			}
+		});
+	}
+	
+	private static Option supprimeCompetition(Competition competition)
+	{
+		return new Option("delete", "d", new Action()
+		{
+			@Override
+			public void optionSelected()
+			{
+				competition.delete();
+				System.out.println(competition.getNom() + " has been deleted of");
+			}
+		});
+		
+	}
+	
 	private static Option modifieNomCompetition(Competition competition)
 	{
 		return new Option("set nom", "sn", new Action()
@@ -113,7 +141,6 @@ public class MenuCompetition {
 		});
 	}
 	
-	
 	private static Option modifieDateCompetition(Competition competition)
 	{
 		return new Option("set date", "sd", new Action()
@@ -124,58 +151,39 @@ public class MenuCompetition {
 				System.out.println("enter le nombre de jour");
 				Scanner scanner = new Scanner(System.in);
 		        int day = scanner.nextInt();
+		        scanner.close();
 				competition.setDateCloture(competition.getDateCloture().plusDays(day));	
 				System.out.println("la nouvelle date est : "+competition.getDateCloture());
 			}
 		});
 	}
-	
-	private static Option ajoutePersonneCompetition(Competition competition)
+
+	private static Option ajouteCandidatCompetition(Competition competition, Candidat candidats)
 	{
 		return new Option("add candidat", "ac", new Action()
 		{
 			@Override
 			public void optionSelected()
 			{
-//				final ArrayList<Personne> lesPersonnes = new ArrayList<>();
-//				lesPersonnes.add((Personne)competition.getCandidatsAInscrire());
-//				List<Personne> candidatAInscrire = new List<Personne>("People list", 
-//						new ListData<Personne>()		
-//						{
-//							// Returns the data needed to refresh the list 
-//							// each time it is displayed. 
-//							public java.util.List<Personne> getList()
-//							{
-//								System.out.println("Sélectionner la personne que vous souhaitez inscrire");
-//								return lesPersonnes;
-//							}	
-//						},
-//						new ListAction<Personne>()
-//						{				
-//							// Triggered each time an item is selected
-//							public void itemSelected(int index, Personne unePersonne)
-//							{
-//								competition.add(unePersonne);
-//								System.out.println(unePersonne 
-//										+ " a bien été inscrit à la compétition " 
-//										+ competition.getCandidatsAInscrire());
-//							}
-//						});
-				
+				if(competition.estEnEquipe() )
+					competition.add((Equipe)candidats);
+				else
+					competition.add((Personne)candidats);
+				System.out.println(candidats.getNom()+" à bien été ajouté à la compétition "
+									+competition.getNom() );
 			}
 		});
 	}
 	
-	
-	private static Option supprimeCompetition(Competition competition)
+	private static Option supprimeCandidatCompetition(Competition competition, Candidat candidat)
 	{
 		return new Option("delete", "d", new Action()
 		{
 			@Override
 			public void optionSelected()
 			{
-				competition.delete();
-				System.out.println(competition + " has been deleted.");
+				competition.remove(candidat);
+				System.out.println(candidat.getNom() + " has been deleted of " +competition.getNom());
 			}
 		});
 	}

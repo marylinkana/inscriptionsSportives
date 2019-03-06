@@ -64,24 +64,42 @@ public class MenuEquipe {
 		private static Option getEquipeMenu(final Equipe equipe)
 		{
 			Menu equipeMenu = new Menu("Edit " + equipe.getNom(), equipe.getNom(), null);
-			equipeMenu.add(afficheEquipe(equipe));
+			equipeMenu.add(afficheNomEquipe(equipe));
+			equipeMenu.add(afficheMembreEquipe(equipe));
 			equipeMenu.add(supprimeEquipe(equipe));
 			equipeMenu.setAutoBack(true);
 			return equipeMenu;
 		}
 		
 		// Returns the option to display someone
-		private static Option afficheEquipe(Equipe equipe)
+		private static Option afficheMembreEquipe(Equipe equipe)
 		{
-			return new Option("show", "s", new Action()
+			return new Option("show Menber", "shm", new Action()
 			{
 				@Override
 				public void optionSelected()
 				{
-					System.out.println("You must give the equipe a name : " + equipe + ".");
+					System.out.println("Liste des membres :");
+					System.out.println(equipe.getMembres());
+
 				}
 			});
 		}
+		
+		private static Option afficheNomEquipe(Equipe equipe)
+		{
+			return new Option("show Name", "shn", new Action()
+			{
+				@Override
+				public void optionSelected()
+				{
+					System.out.println("You must give the equipe a name : ");
+					System.out.println(equipe.getNom());
+				}
+			});
+		}
+		
+		
 		
 		private static Option supprimeEquipe(Equipe equipe)
 		{
