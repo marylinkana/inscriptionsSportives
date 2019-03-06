@@ -83,15 +83,15 @@ public class MenuEquipe {
 			});
 		}
 		
-		private static Option supprimeEquipe(Equipe Equipe)
+		private static Option supprimeEquipe(Equipe equipe)
 		{
 			return new Option("delete", "d", new Action()
 			{
 				@Override
 				public void optionSelected()
 				{
-					Equipe.delete();
-					System.out.println(Equipe + " has been deleted.");
+					equipe.delete();
+					System.out.println(equipe + " has been deleted.");
 				}
 			});
 		}
