@@ -60,10 +60,10 @@ public class Equipe extends Candidat
 	 */
 	
 //	public Set<Personne> getPersonnesAAjouter()
-////	{
-////		// TODO retourner les personnes que l'on peut ajouter dans cette équipe.
-////		return Collections.unmodifiableSortedSet(personnes) - Collections.unmodifiableSortedSet(membres);
-////	}
+//	{
+//		// TODO retourner les personnes que l'on peut ajouter dans cette équipe.
+//		return Collections.unmodifiableSortedSet(personnes) - Collections.unmodifiableSortedSet(membres);
+//	}
 	
 	@Override
 	public void delete()
