@@ -62,7 +62,7 @@ public class MenuPersonne {
 	// Creates an sub-menu for someone. 
 	private static Option getPersonneMenu(final Personne personne)
 	{
-		Menu personneMenu = new Menu("Edit " + personne.getPrenom(), personne.getPrenom(), null);
+		Menu personneMenu = new Menu("Edit " + personne.getNom(), personne.getNom(), null);
 		personneMenu.add(affichePersonne(personne));
 		personneMenu.add(afficheEquipePersonne(personne));
 		personneMenu.add(setNomPersonne(personne));
@@ -70,6 +70,7 @@ public class MenuPersonne {
 		personneMenu.add(setMailPersonne(personne));
 		personneMenu.add(supprimePersonne(personne));
 		personneMenu.setAutoBack(true);
+		personneMenu.addBack("r");
 		return personneMenu;
 	}
 	
@@ -104,7 +105,7 @@ public class MenuPersonne {
 	}
 	
 	private static Option setMailPersonne(Personne personne) {
-		return new Option("set Prenom", "stm", new Action()
+		return new Option("set Mail", "stm", new Action()
 				
 				{
 					@Override

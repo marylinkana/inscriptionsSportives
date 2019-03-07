@@ -25,7 +25,7 @@ public class MenuEquipe {
 	 // Returns the list to print
 		public static List<Equipe> getEquipeList(Inscriptions inscriptions)
 		{
-			List<Equipe> liste = new List<>("Select personne", "s",
+			List<Equipe> liste = new List<>("Select equipe", "s",
 					getListEquipe(inscriptions),
 					getOptionListEquipe());
 			liste.setAutoBack(false);
@@ -65,6 +65,7 @@ public class MenuEquipe {
 		{
 			Menu equipeMenu = new Menu("Edit " + equipe.getNom(), equipe.getNom(), null);
 			equipeMenu.add(afficheNomEquipe(equipe));
+			equipeMenu.add(afficheCompetitionEquipe(equipe));
 			equipeMenu.add(afficheMembreEquipe(equipe));
 			equipeMenu.add(supprimeEquipe(equipe));
 			equipeMenu.setAutoBack(true);
@@ -72,9 +73,22 @@ public class MenuEquipe {
 		}
 		
 		// Returns the option to display someone
+		private static Option afficheCompetitionEquipe(Equipe equipe) {
+			return new Option("show groupe", "shg", new Action()
+					
+					{
+						@Override
+						public void optionSelected()
+						{
+							System.out.println("competition : " + equipe.getCompetitions() + ".");
+
+						}
+					});
+		}
+		
 		private static Option afficheMembreEquipe(Equipe equipe)
 		{
-			return new Option("show Menber", "shm", new Action()
+			return new Option("show Member", "shm", new Action()
 			{
 				@Override
 				public void optionSelected()
