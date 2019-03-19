@@ -12,11 +12,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import inscriptions.Candidat;
-import inscriptions.Competition;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
-import inscriptions.Equipe;
+import Inscriptions.Candidat;
+import Inscriptions.Competition;
+import Inscriptions.Equipe;
+import Inscriptions.Inscriptions;
+import Inscriptions.Personne;
 
 public class CompetitionTest {
 	

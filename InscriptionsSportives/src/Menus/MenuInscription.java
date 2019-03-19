@@ -1,4 +1,4 @@
-package menus;
+package Menus;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,10 +9,10 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedSet;
 
+import Inscriptions.*;
 import commandLineMenus.*;
 import commandLineMenus.examples.ListOptions;
 import commandLineMenus.rendering.examples.util.InOut;
-import inscriptions.*;
 
 public class MenuInscription
 {

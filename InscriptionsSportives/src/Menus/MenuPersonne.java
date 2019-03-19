@@ -1,17 +1,19 @@
-package menus;
+package Menus;
 
 import java.util.ArrayList;
 import java.util.SortedSet;
 
+import Inscriptions.Equipe;
+import Inscriptions.Inscriptions;
+import Inscriptions.Personne;
 import commandLineMenus.Action;
 import commandLineMenus.List;
+import commandLineMenus.ListAction;
 import commandLineMenus.ListData;
 import commandLineMenus.ListOption;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import commandLineMenus.rendering.examples.util.InOut;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
 
 public class MenuPersonne {
 
@@ -68,11 +70,147 @@ public class MenuPersonne {
 		personneMenu.add(setNomPersonne(personne));
 		personneMenu.add(setPrenomPersonne(personne));
 		personneMenu.add(setMailPersonne(personne));
+		personneMenu.add(editEquipe(personne));
+		personneMenu.add(editCompetition(personne));
 		personneMenu.add(supprimePersonne(personne));
 		personneMenu.setAutoBack(true);
 		personneMenu.addBack("r");
 		return personneMenu;
 	}
+	
+	private static Menu editEquipe(Personne personne)
+	{
+		Menu competitionMenu = new Menu("edit équipe of personne Sub-Menu", "Equipe", "eq");
+		competitionMenu.add(getEquipeOfPerson(personne));
+		competitionMenu.add(addPersonToEquipe(personne));
+		competitionMenu.add(removePersonToEquipe(personne));
+		competitionMenu.addBack("r");
+
+		return competitionMenu;
+	}
+	
+	private static Menu editCompetition(Personne personne)
+	{
+		Menu competitionMenu = new Menu("edit équipe of personne Sub-Menu", "Equipe", "eq");
+		competitionMenu.add(getCompetitionOfPerson(personne));
+//		competitionMenu.add(addPersonToCompetition(personne));
+//		competitionMenu.add(removePersonToCompetition(personne));
+		competitionMenu.addBack("r");
+
+		return competitionMenu;
+	}
+	
+	private static Option getCompetitionOfPerson(Personne personne)
+	{
+		return new Option("show Competition", "1", new Action()
+		{
+			@Override
+			public void optionSelected()
+			{
+				System.out.println("Liste des membres :");
+				System.out.println(personne.getCompetitions());
+
+			}
+		});
+	}
+	
+//	private static Option addPersonToCompetition(Personne personne) {
+//        return new List<>(
+//                "Ajouter cette personne à une competition", "2",
+//                new ListData<Competition>()
+//                {
+//                    @Override
+//                    public java.util.List<Competition> getList() {
+//                        return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
+//                    }
+//                },
+//                new ListAction<Competition>()
+//                {
+//                    @Override
+//                    public void itemSelected(int i, Competition competition) {
+//                        competition.add(personne);
+//                    }
+//
+//                }
+//        );
+//    }
+//	
+//	private static Option removePersonToCompetition(Personne personne) {
+//        return new List<>(
+//                "Ajouter un membre à l'équipe", "3",
+//                new ListData<Competition>()
+//                {
+//                    @Override
+//                    public java.util.List<Competition> getList() {
+//                        return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
+//                    }
+//                },
+//                new ListAction<Competition>()
+//                {
+//                    @Override
+//                    public void itemSelected(int i, Competition competition) {
+//                        competition.remove(personne);
+//                    }
+//
+//                }
+//        );
+//    }
+	
+	private static Option getEquipeOfPerson(Personne personne)
+	{
+		return new Option("show Equipe", "1", new Action()
+		{
+			@Override
+			public void optionSelected()
+			{
+				System.out.println("Liste des membres :");
+				System.out.println(personne.getEquipes());
+
+			}
+		});
+	}
+	
+	private static Option addPersonToEquipe(Personne personne) {
+        return new List<>(
+                "Ajouter un membre à l'équipe", "2",
+                new ListData<Equipe>()
+                {
+                    @Override
+                    public java.util.List<Equipe> getList() {
+                        return new ArrayList<>(Inscriptions.getInscriptions().getEquipes());
+                    }
+                },
+                new ListAction<Equipe>()
+                {
+                    @Override
+                    public void itemSelected(int i, Equipe equipe) {
+                        equipe.add(personne);
+                    }
+
+                }
+        );
+    }
+	
+	private static Option removePersonToEquipe(Personne personne) {
+        return new List<>(
+                "Ajouter un membre à l'équipe", "3",
+                new ListData<Equipe>()
+                {
+                    @Override
+                    public java.util.List<Equipe> getList() {
+                        return new ArrayList<>(Inscriptions.getInscriptions().getEquipes());
+                    }
+                },
+                new ListAction<Equipe>()
+                {
+                    @Override
+                    public void itemSelected(int i, Equipe equipe) {
+                        equipe.remove(personne);
+                    }
+
+                }
+        );
+    }
 	
 	private static Option setNomPersonne(Personne personne) {
 		return new Option("set Nom", "stn", new Action()

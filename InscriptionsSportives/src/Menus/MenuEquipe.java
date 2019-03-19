@@ -1,18 +1,18 @@
-package menus;
+package Menus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.SortedSet;
 
+import Inscriptions.Candidat;
+import Inscriptions.Competition;
+import Inscriptions.Equipe;
+import Inscriptions.Inscriptions;
+import Inscriptions.Personne;
 import commandLineMenus.*;
 import commandLineMenus.examples.ListOptions;
 import commandLineMenus.rendering.examples.util.InOut;
-import inscriptions.Candidat;
-import inscriptions.Competition;
-import inscriptions.Equipe;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
 
 public class MenuEquipe {
 
@@ -66,10 +66,21 @@ public class MenuEquipe {
 			Menu equipeMenu = new Menu("Edit " + equipe.getNom(), equipe.getNom(), null);
 			equipeMenu.add(afficheNomEquipe(equipe));
 			equipeMenu.add(afficheCompetitionEquipe(equipe));
-			equipeMenu.add(afficheMembreEquipe(equipe));
+			equipeMenu.add(editMemberEquipe(equipe));
 			equipeMenu.add(supprimeEquipe(equipe));
 			equipeMenu.setAutoBack(true);
 			return equipeMenu;
+		}
+		
+		private static Menu editMemberEquipe(Equipe equipe)
+		{
+			Menu competitionMenu = new Menu("edit member to équipe Sub-Menu", "Membres", "me");
+			competitionMenu.add(getMembreOfEquipe(equipe));
+			competitionMenu.add(addMemberToEquipe(equipe));
+			competitionMenu.add(removeMemberToEquipe(equipe));
+			competitionMenu.addBack("r");
+
+			return competitionMenu;
 		}
 		
 		// Returns the option to display someone
@@ -86,9 +97,9 @@ public class MenuEquipe {
 					});
 		}
 		
-		private static Option afficheMembreEquipe(Equipe equipe)
+		private static Option getMembreOfEquipe(Equipe equipe)
 		{
-			return new Option("show Member", "shm", new Action()
+			return new Option("show Member", "1", new Action()
 			{
 				@Override
 				public void optionSelected()
@@ -99,6 +110,47 @@ public class MenuEquipe {
 				}
 			});
 		}
+		
+		private static Option addMemberToEquipe(Equipe equipe) {
+	        return new List<>(
+	                "Ajouter un membre à l'équipe", "2",
+	                new ListData<Personne>()
+	                {
+	                    @Override
+	                    public java.util.List<Personne> getList() {
+	                        return new ArrayList<>(Inscriptions.getInscriptions().getPersonnes());
+	                    }
+	                },
+	                new ListAction<Personne>()
+	                {
+	                    @Override
+	                    public void itemSelected(int i, Personne personne) {
+	                        equipe.add(personne);
+	                    }
+
+	                }
+	        );
+	    }
+		
+		private static Option removeMemberToEquipe(Equipe equipe) {
+	        return new List<>(
+	                "Supprimer un candidat de la competition", "3",
+	                new ListData<Personne>()
+	                {
+	                    @Override
+	                    public java.util.List<Personne> getList() {
+	                        return new ArrayList<>(equipe.getMembres());
+	                    }
+	                },
+	                new ListAction<Personne>()
+	                {
+	                    @Override
+	                    public void itemSelected(int i, Personne personne) {
+	                        equipe.remove(personne);
+	                    }
+	                }
+	        );
+	    }
 		
 		private static Option afficheNomEquipe(Equipe equipe)
 		{

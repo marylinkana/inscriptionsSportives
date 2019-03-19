@@ -1,4 +1,4 @@
-package inscriptions;
+package Inscriptions;
 
 import java.io.Serializable;
 
