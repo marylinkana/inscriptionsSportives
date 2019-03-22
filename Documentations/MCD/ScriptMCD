@@ -1,0 +1,10 @@
+lien, 11 Personne, 01 Candidat
+
+Personne : nump, prenom, email
+Equipe : nume
+Candidat : numc, nomc
+Competition : numc, nomc, dateCloture, type
+
+appartenir, 0N Personne, 0N Equipe
+devenir, 11 Equipe, 0N Candidat
+inscrire, 0N Candidat, 0N Competition
