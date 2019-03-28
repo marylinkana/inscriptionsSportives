@@ -3,6 +3,7 @@ package Menus;
 import java.util.ArrayList;
 import java.util.SortedSet;
 
+import Inscriptions.Candidat;
 import Inscriptions.Equipe;
 import Inscriptions.Inscriptions;
 import Inscriptions.Personne;
@@ -80,7 +81,7 @@ public class MenuPersonne {
 	
 	private static Menu editEquipe(Personne personne)
 	{
-		Menu competitionMenu = new Menu("edit équipe of personne Sub-Menu", "Equipe", "eq");
+		Menu competitionMenu = new Menu("edit groupe of personne Sub-Menu", "Groupe", "gr");
 		competitionMenu.add(getEquipeOfPerson(personne));
 		competitionMenu.add(addPersonToEquipe(personne));
 		competitionMenu.add(removePersonToEquipe(personne));
@@ -114,7 +115,7 @@ public class MenuPersonne {
 		});
 	}
 	
-//	private static Option addPersonToCompetition(Personne personne) {
+//	private static Option addPersonToCompetition(Candidat personne) {
 //        return new List<>(
 //                "Ajouter cette personne à une competition", "2",
 //                new ListData<Competition>()
