@@ -118,7 +118,7 @@ public class MenuEquipe {
 	                {
 	                    @Override
 	                    public java.util.List<Personne> getList() {
-	                        return new ArrayList<>(Inscriptions.getInscriptions().getPersonnes());
+	                        return new ArrayList<>(equipe.getPersonnesAAjouter());
 	                    }
 	                },
 	                new ListAction<Personne>()
@@ -134,7 +134,7 @@ public class MenuEquipe {
 		
 		private static Option removeMemberToEquipe(Equipe equipe) {
 	        return new List<>(
-	                "Supprimer un candidat de la competition", "3",
+	                "Supprimer un candidat de l'equipe", "3",
 	                new ListData<Personne>()
 	                {
 	                    @Override

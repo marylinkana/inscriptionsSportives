@@ -3,6 +3,7 @@ package Inscriptions;
 import java.io.Serializable;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
@@ -154,10 +155,28 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return les personnes que l'on peut inscrire à cette compétition.
 	 */
 	
-	public Set<Candidat> getCandidatsAInscrire()
-	{
-		// TODO les candidats que l'on peut inscrire à cette compétition.
-		return null;
+	public Set<Candidat> getCandidatsAInscrire() {
+		// les candidats que l'on peut inscrire � cette comp�tition.
+		Set<Candidat> candidats = new HashSet<>();
+		for (Candidat candidat : inscriptions.getCandidats()) {
+
+			if (enEquipe && (candidat instanceof Personne))
+				continue;
+			if (!enEquipe && (candidat instanceof Equipe))
+				continue;
+			boolean estInscrit = false;
+
+			for (Competition cmpt : inscriptions.getCompetitions()) {
+				if (cmpt.getCandidats().contains(candidat)) {
+					estInscrit = true;
+					break;
+				}
+			}
+			if (!estInscrit)
+				candidats.add(candidat);
+
+		}
+		return candidats;
 	}
 
 	/**

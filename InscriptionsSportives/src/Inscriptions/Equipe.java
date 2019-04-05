@@ -1,6 +1,7 @@
 package Inscriptions;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -59,11 +60,22 @@ public class Equipe extends Candidat
 	 * @return les personnes que l'on peut ajouter dans cette équipe.
 	 */
 	
-//	public Set<Personne> getPersonnesAAjouter()
-//	{
-//		// TODO retourner les personnes que l'on peut ajouter dans cette équipe.
-//		return Collections.unmodifiableSortedSet(personnes) - Collections.unmodifiableSortedSet(membres);
-//	}
+	public static Set<Personne> getPersonnesAAjouter() {
+		Set<Personne> persons = new HashSet<>();
+		for (Personne person : inscriptions.getPersonnes()) {
+			boolean estInscrit = false;
+			for (Equipe equipe : inscriptions.getEquipes()) {
+				if (equipe.getMembres().contains(person)) {
+					estInscrit = true;
+					break;
+				}
+			}
+			if (!estInscrit)
+				persons.add(person);
+
+		}
+		return persons;
+	}
 	
 	@Override
 	public void delete()

@@ -82,7 +82,7 @@ public class MenuCompetition {
 		Menu competitionMenu = new Menu("add Candidat to Competition Sub-Menu", "candidat", "ca");
 		competitionMenu.add(getCandidatOfCompetition(competition));
 		competitionMenu.add(addPersonToCompetition(competition));
-		competitionMenu.add(addEquipeToCompetition(competition));
+//		competitionMenu.add(addEquipeToCompetition(competition));
 		competitionMenu.add(removeCandidatToCompetition(competition));
 		competitionMenu.addBack("r");
 
@@ -106,43 +106,49 @@ public class MenuCompetition {
 	private static Option addPersonToCompetition(Competition competition) {
         return new List<>(
                 "Ajouter une personne à la competition", "2",
-                new ListData<Personne>()
+                new ListData<Candidat>()
                 {
                     @Override
-                    public java.util.List<Personne> getList() {
-                        return new ArrayList<>(Inscriptions.getInscriptions().getPersonnes());
+                    public java.util.List<Candidat> getList() {
+                        return new ArrayList<>(competition.getCandidatsAInscrire());
                     }
                 },
-                new ListAction<Personne>()
+                new ListAction<Candidat>()
                 {
                     @Override
-                    public void itemSelected(int i, Personne personne) {
-                        competition.add(personne);
+                    public void itemSelected(int i, Candidat candidat) {
+                        if (candidat instanceof Personne) {
+                        	competition.add((Personne) candidat);
+                        }
+                        else if (candidat instanceof Equipe) {
+                        	competition.add((Equipe) candidat);
+                        }
+                        else {System.out.println("problaime de type");}
                     }
 
                 }
         );
     }
 
-    private static Option addEquipeToCompetition(Competition competition) {
-        return new List<>(
-                "Ajouter une équipe à la competition", "3",
-                new ListData<Equipe>()
-                {
-                    @Override
-                    public java.util.List<Equipe> getList() {
-                        return new ArrayList<>(Inscriptions.getInscriptions().getEquipes());
-                    }
-                },
-                new ListAction<Equipe>()
-                {
-                    @Override
-                    public void itemSelected(int i, Equipe equipe) {
-                        competition.add(equipe);
-                    }
-                }
-        );
-    }
+//    private static Option addEquipeToCompetition(Competition competition) {
+//        return new List<>(
+//                "Ajouter une équipe à la competition", "3",
+//                new ListData<Candidat>()
+//                {
+//                    @Override
+//                    public java.util.List<Candidat> getList() {
+//                        return new ArrayList<>(competition.getCandidatsAInscrire());
+//                    }
+//                },
+//                new ListAction<Candidat>()
+//                {
+//                    @Override
+//                    public void itemSelected(int i, Candidat equipe) {
+//                        competition.add(equipe);
+//                    }
+//                }
+//        );
+//    }
     
     
     private static Option removeCandidatToCompetition(Competition competition) {
@@ -234,35 +240,35 @@ public class MenuCompetition {
 		});
 	}
 
-	private static Option ajouteCandidatCompetition(Competition competition, Candidat candidats)
-	{
-		return new Option("add candidat", "ac", new Action()
-		{
-			@Override
-			public void optionSelected()
-			{
-				if(competition.estEnEquipe() )
-					competition.add((Equipe)candidats);
-				else
-					competition.add((Personne)candidats);
-				System.out.println(candidats.getNom()+" à bien été ajouté à la compétition "
-									+competition.getNom() );
-			}
-		});
-	}
+//	private static Option ajouteCandidatCompetition(Competition competition, Candidat candidats)
+//	{
+//		return new Option("add candidat", "ac", new Action()
+//		{
+//			@Override
+//			public void optionSelected()
+//			{
+//				if(competition.estEnEquipe() )
+//					competition.add((Equipe)candidats);
+//				else
+//					competition.add((Personne)candidats);
+//				System.out.println(candidats.getNom()+" à bien été ajouté à la compétition "
+//									+competition.getNom() );
+//			}
+//		});
+//	}
 	
-	private static Option supprimeCandidatCompetition(Competition competition, Candidat candidat)
-	{
-		return new Option("delete", "d", new Action()
-		{
-			@Override
-			public void optionSelected()
-			{
-				competition.remove(candidat);
-				System.out.println(candidat.getNom() + " has been deleted of " +competition.getNom());
-			}
-		});
-	}
+//	private static Option supprimeCandidatCompetition(Competition competition, Candidat candidat)
+//	{
+//		return new Option("delete", "d", new Action()
+//		{
+//			@Override
+//			public void optionSelected()
+//			{
+//				competition.remove(candidat);
+//				System.out.println(candidat.getNom() + " has been deleted of " +competition.getNom());
+//			}
+//		});
+//	}
 	
 	public static  Option creerCompetitionOption(Inscriptions inscriptions) {
 		return new Option("Créer une competition", "c", new Action()
@@ -275,8 +281,9 @@ public class MenuCompetition {
 				Scanner scanner = new Scanner(System.in);
 		        int day = scanner.nextInt();
 		        LocalDate date = LocalDate.now().plusDays(day);
-				System.out.println("si la competition est en équipe, entrez : oui sinon entez : nom");
-				String enEquipe = InOut.getString("En équipe : ");
+				System.out.println("si la compétition est en équipe, entrez : oui sinon entez : non");
+				String enEquipe = InOut.getString("En équipe? : ");
+				System.out.println(enEquipe);
 				boolean type;
 				if(enEquipe == "oui")
 		        	type = true;
