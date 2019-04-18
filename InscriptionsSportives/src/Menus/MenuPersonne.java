@@ -81,7 +81,7 @@ public class MenuPersonne {
 	
 	private static Menu editEquipe(Personne personne)
 	{
-		Menu competitionMenu = new Menu("edit groupe of personne Sub-Menu", "Groupe", "gr");
+		Menu competitionMenu = new Menu("edit equipe of personne Sub-Menu", "Edit equipe", "ed");
 		competitionMenu.add(getEquipeOfPerson(personne));
 		competitionMenu.add(addPersonToEquipe(personne));
 		competitionMenu.add(removePersonToEquipe(personne));
@@ -92,7 +92,7 @@ public class MenuPersonne {
 	
 	private static Menu editCompetition(Personne personne)
 	{
-		Menu competitionMenu = new Menu("edit équipe of personne Sub-Menu", "Equipe", "eq");
+		Menu competitionMenu = new Menu("edit groupe of personne Sub-Menu", "Edit groupe", "gr");
 		competitionMenu.add(getCompetitionOfPerson(personne));
 //		competitionMenu.add(addPersonToCompetition(personne));
 //		competitionMenu.add(removePersonToCompetition(personne));
@@ -125,18 +125,17 @@ public class MenuPersonne {
 //                        return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
 //                    }
 //                },
-//                new ListAction<Competition>()
+//                new ListAction<Personne>()
 //                {
 //                    @Override
 //                    public void itemSelected(int i, Competition competition) {
 //                        competition.add(personne);
 //                    }
-//
 //                }
 //        );
 //    }
 //	
-//	private static Option removePersonToCompetition(Personne personne) {
+//	private static Option removePersonToCompetition(Candidat personne) {
 //        return new List<>(
 //                "Ajouter un membre à l'équipe", "3",
 //                new ListData<Competition>()
@@ -146,7 +145,7 @@ public class MenuPersonne {
 //                        return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
 //                    }
 //                },
-//                new ListAction<Competition>()
+//                new ListAction<Personne>()
 //                {
 //                    @Override
 //                    public void itemSelected(int i, Competition competition) {
@@ -156,7 +155,7 @@ public class MenuPersonne {
 //                }
 //        );
 //    }
-	
+//	
 	private static Option getEquipeOfPerson(Personne personne)
 	{
 		return new Option("show Equipe", "1", new Action()
@@ -164,7 +163,7 @@ public class MenuPersonne {
 			@Override
 			public void optionSelected()
 			{
-				System.out.println("Liste des membres :");
+				System.out.println("Liste ces équipes :");
 				System.out.println(personne.getEquipes());
 
 			}
@@ -173,7 +172,7 @@ public class MenuPersonne {
 	
 	private static Option addPersonToEquipe(Personne personne) {
         return new List<>(
-                "Ajouter un membre à l'équipe", "2",
+                "Ajouter ce membre à l'équipe", "2",
                 new ListData<Equipe>()
                 {
                     @Override
@@ -194,7 +193,7 @@ public class MenuPersonne {
 	
 	private static Option removePersonToEquipe(Personne personne) {
         return new List<>(
-                "Ajouter un membre à l'équipe", "3",
+                "Supprimer ce membre de l'équipe", "3",
                 new ListData<Equipe>()
                 {
                     @Override
@@ -229,14 +228,14 @@ public class MenuPersonne {
 	}
 	
 	private static Option setPrenomPersonne(Personne personne) {
-		return new Option("set Prenom", "stp", new Action()
+		return new Option("set Prenom", "spp", new Action()
 				
 				{
 					@Override
 					public void optionSelected()
 					{
-						System.out.println("veillez saisir le nouveau nom");
-						String prenom = InOut.getString("Nom : ");
+						System.out.println("veillez saisir le nouveau prenom");
+						String prenom = InOut.getString("Prenom : ");
 						personne.setPrenom(prenom);
 						System.out.println("le prénom a bien été changé");
 					}
@@ -281,9 +280,9 @@ public class MenuPersonne {
 			@Override
 			public void optionSelected()
 			{
-				System.out.println("You must give the man a name : " + personne.getNom() + ".");
-				System.out.println("You must give the man a prenom : " + personne.getPrenom() + ".");
-				System.out.println("You must give the man a mail : " + personne.getMail() + ".");
+				System.out.println("Name : " + personne.getNom() + ".");
+				System.out.println("Prenom : " + personne.getPrenom() + ".");
+				System.out.println("Email : " + personne.getMail() + ".");
 			}
 		});
 	}

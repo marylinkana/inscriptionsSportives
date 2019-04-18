@@ -72,7 +72,6 @@ public class Equipe extends Candidat
 			}
 			if (!estInscrit)
 				persons.add(person);
-
 		}
 		return persons;
 	}

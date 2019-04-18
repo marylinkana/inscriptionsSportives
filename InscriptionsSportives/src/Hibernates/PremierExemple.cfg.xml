@@ -15,9 +15,15 @@
 	<property name="hibernate.connection.password"></property>
 	<property name="hibernate.show_sql">true</property>
 			
-	<property name="hbm2ddl.auto">update</property>
+	<property name="hbm2ddl.auto">create</property>
 	
-	<mapping class="hibernate.premierExemple.Personne" />
+	<mapping class="Hibernates.Personne" />
+	<mapping class="Hibernates.Equipe" />
+	<mapping class="Hibernates.Candidat" />
+	<mapping class="Hibernates.Competition" />
+	<mapping class="Hibernates.Appartenir" />
+	<mapping class="Hibernates.Inscrire" />
+
          
 </session-factory>
 </hibernate-configuration>

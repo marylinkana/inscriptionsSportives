@@ -74,13 +74,13 @@ public class MenuEquipe {
 		
 		private static Menu editMemberEquipe(Equipe equipe)
 		{
-			Menu competitionMenu = new Menu("edit member to équipe Sub-Menu", "Membres", "me");
-			competitionMenu.add(getMembreOfEquipe(equipe));
-			competitionMenu.add(addMemberToEquipe(equipe));
-			competitionMenu.add(removeMemberToEquipe(equipe));
-			competitionMenu.addBack("r");
+			Menu equipeMenu = new Menu("edit member to équipe Sub-Menu", "Membres", "me");
+			equipeMenu.add(getMembreOfEquipe(equipe));
+			equipeMenu.add(addMemberToEquipe(equipe));
+			equipeMenu.add(removeMemberToEquipe(equipe));
+			equipeMenu.addBack("r");
 
-			return competitionMenu;
+			return equipeMenu;
 		}
 		
 		// Returns the option to display someone
