@@ -8,3 +8,11 @@ Competition : numc, nomc, dateCloture, type
 appartenir, 0N Personne, 0N Equipe
 devenir, 11 Equipe, 0N Candidat
 inscrire, 0N Candidat, 0N Competition
+
+les tables
+Personne ( nump, prenom, email, numc )
+Equipe ( nume, numc )
+Candidat ( numc, nomc )
+Competition ( numc, nomc, dateCloture, type )
+appartenir ( nump, nume )
+inscrire ( numc, numc.1 )
