@@ -81,8 +81,7 @@ public class MenuCompetition {
 	{
 		Menu competitionMenu = new Menu("add Candidat to Competition Sub-Menu", "candidat", "ca");
 		competitionMenu.add(getCandidatOfCompetition(competition));
-		competitionMenu.add(addPersonToCompetition(competition));
-//		competitionMenu.add(addEquipeToCompetition(competition));
+		competitionMenu.add(addCandidatToCompetition(competition));
 		competitionMenu.add(removeCandidatToCompetition(competition));
 		competitionMenu.addBack("r");
 
@@ -103,9 +102,9 @@ public class MenuCompetition {
 		});
 	}
 	
-	private static Option addPersonToCompetition(Competition competition) {
+	private static Option addCandidatToCompetition(Competition competition) {
         return new List<>(
-                "Ajouter une personne à la competition", "2",
+                "Ajouter un candidat à la competition", "2",
                 new ListData<Candidat>()
                 {
                     @Override
@@ -129,26 +128,6 @@ public class MenuCompetition {
                 }
         );
     }
-
-//    private static Option addEquipeToCompetition(Competition competition) {
-//        return new List<>(
-//                "Ajouter une équipe à la competition", "3",
-//                new ListData<Candidat>()
-//                {
-//                    @Override
-//                    public java.util.List<Candidat> getList() {
-//                        return new ArrayList<>(competition.getCandidatsAInscrire());
-//                    }
-//                },
-//                new ListAction<Candidat>()
-//                {
-//                    @Override
-//                    public void itemSelected(int i, Candidat equipe) {
-//                        competition.add(equipe);
-//                    }
-//                }
-//        );
-//    }
     
     
     private static Option removeCandidatToCompetition(Competition competition) {
@@ -275,21 +254,13 @@ public class MenuCompetition {
 		{
 			public void optionSelected()
 			{
-				System.out.println("Enter le nom de la compétition  ");
-				String nom = InOut.getString("Nom : ");
-				System.out.print("Entez le nombre de jour avant la cloture :");
-				Scanner scanner = new Scanner(System.in);
-		        int day = scanner.nextInt();
+				String nom = InOut.getString("Nom de la compétition : ");
+		        int day = InOut.getInt("nombre de jour avans la cloture des inscriptions : ");
 		        LocalDate date = LocalDate.now().plusDays(day);
-				System.out.println("si la compétition est en équipe, entrez : oui sinon entez : non");
-				String enEquipe = InOut.getString("En équipe? : ");
+				String enEquipe = InOut.getString("la compétition est-elle en équipe ? : ");
 				System.out.println(enEquipe);
 				boolean type;
-				if(enEquipe == "oui")
-		        	type = true;
-		        else
-		        	type = false;
-				
+				type = enEquipe.equals("oui");
                 inscriptions.createCompetition(nom, date, type);
 			}
 		});

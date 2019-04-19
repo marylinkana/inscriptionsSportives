@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.SortedSet;
 
 import Inscriptions.Candidat;
+import Inscriptions.Competition;
 import Inscriptions.Equipe;
 import Inscriptions.Inscriptions;
 import Inscriptions.Personne;
@@ -92,10 +93,10 @@ public class MenuPersonne {
 	
 	private static Menu editCompetition(Personne personne)
 	{
-		Menu competitionMenu = new Menu("edit groupe of personne Sub-Menu", "Edit groupe", "gr");
+		Menu competitionMenu = new Menu("edit competition of personne Sub-Menu", "Edit competition", "co");
 		competitionMenu.add(getCompetitionOfPerson(personne));
-//		competitionMenu.add(addPersonToCompetition(personne));
-//		competitionMenu.add(removePersonToCompetition(personne));
+		competitionMenu.add(addPersonToCompetition(personne));
+		competitionMenu.add(removePersonToCompetition(personne));
 		competitionMenu.addBack("r");
 
 		return competitionMenu;
@@ -115,47 +116,45 @@ public class MenuPersonne {
 		});
 	}
 	
-//	private static Option addPersonToCompetition(Candidat personne) {
-//        return new List<>(
-//                "Ajouter cette personne à une competition", "2",
-//                new ListData<Competition>()
-//                {
-//                    @Override
-//                    public java.util.List<Competition> getList() {
-//                        return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
-//                    }
-//                },
-//                new ListAction<Personne>()
-//                {
-//                    @Override
-//                    public void itemSelected(int i, Competition competition) {
-//                        competition.add(personne);
-//                    }
-//                }
-//        );
-//    }
-//	
-//	private static Option removePersonToCompetition(Candidat personne) {
-//        return new List<>(
-//                "Ajouter un membre à l'équipe", "3",
-//                new ListData<Competition>()
-//                {
-//                    @Override
-//                    public java.util.List<Competition> getList() {
-//                        return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
-//                    }
-//                },
-//                new ListAction<Personne>()
-//                {
-//                    @Override
-//                    public void itemSelected(int i, Competition competition) {
-//                        competition.remove(personne);
-//                    }
-//
-//                }
-//        );
-//    }
-//	
+	private static Option addPersonToCompetition(Personne personne) {
+        return new List<>(
+                "Ajouter ce candidat à une competition", "2",
+                new ListData<Competition>()
+                {
+                    @Override
+                    public java.util.List<Competition> getList() {
+                        return new ArrayList<>(Inscriptions.getInscriptions().getCompetitions());
+                    }
+                },
+                new ListAction<Competition>()
+                {
+                    @Override
+                    public void itemSelected(int i, Competition competition) {
+                        competition.add(personne);
+                    }
+                }
+        );
+    }
+	private static Option removePersonToCompetition(Personne personne) {
+        return new List<>(
+                "Ajouter ce candidat d'une competition ", "3",
+                new ListData<Competition>()
+                {
+                    @Override
+                    public java.util.List<Competition> getList() {
+                        return new ArrayList<>(personne.getCompetitions());
+                    }
+                },
+                new ListAction<Competition>()
+                {
+                    @Override
+                    public void itemSelected(int i, Competition competition) {
+                        competition.remove(personne);
+                    }
+
+                }
+        );
+    }
 	private static Option getEquipeOfPerson(Personne personne)
 	{
 		return new Option("show Equipe", "1", new Action()
@@ -163,7 +162,7 @@ public class MenuPersonne {
 			@Override
 			public void optionSelected()
 			{
-				System.out.println("Liste ces équipes :");
+				System.out.println("Liste des équipes :");
 				System.out.println(personne.getEquipes());
 
 			}
@@ -172,7 +171,7 @@ public class MenuPersonne {
 	
 	private static Option addPersonToEquipe(Personne personne) {
         return new List<>(
-                "Ajouter ce membre à l'équipe", "2",
+                "Ajouter ce membre à une équipe", "2",
                 new ListData<Equipe>()
                 {
                     @Override
@@ -193,12 +192,12 @@ public class MenuPersonne {
 	
 	private static Option removePersonToEquipe(Personne personne) {
         return new List<>(
-                "Supprimer ce membre de l'équipe", "3",
+                "Supprimer ce membre d'une équipe", "3",
                 new ListData<Equipe>()
                 {
                     @Override
                     public java.util.List<Equipe> getList() {
-                        return new ArrayList<>(Inscriptions.getInscriptions().getEquipes());
+                        return new ArrayList<>(personne.getEquipes());
                     }
                 },
                 new ListAction<Equipe>()

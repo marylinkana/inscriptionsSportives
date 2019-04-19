@@ -81,7 +81,7 @@ public class Equipe extends Candidat
 	{
 		super.delete();
 	}
-	
+	 
 	@Override
 	public String toString()
 	{

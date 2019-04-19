@@ -174,10 +174,10 @@ public class PremierExemple
 		try
 		{
 			Session s = getSession();
-//			Personne joffrey = new Personne("amandine", "thivet", "amandine@thivet");
-//			Transaction t = s.beginTransaction();
-//			s.persist(joffrey);
-//			t.commit();
+			Personne amandine = new Personne("amandine", "thivet", "amandine@thivet");
+			Transaction t = s.beginTransaction();
+			s.persist(amandine);
+			t.commit();
 			s.close();
 		}
 		catch (HibernateException ex)
