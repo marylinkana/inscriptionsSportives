@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.SortedSet;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import Inscriptions.Candidat;
 import Inscriptions.Competition;
 import Inscriptions.Equipe;
@@ -96,7 +100,7 @@ public class MenuEquipe {
 		
 		// Returns the option to display someone
 		private static Option getCompetitionOfEquipe(Equipe equipe) {
-			return new Option("Show its competitions", "shg", new Action()
+			return new Option("Show its competitions", "shc", new Action()
 					
 					{
 						@Override
@@ -239,6 +243,19 @@ public class MenuEquipe {
 					System.out.println("Enter le nom de l'équipe  ");
 					String nom = InOut.getString("Nom : ");
 	                inscriptions.createEquipe(nom);
+	                try
+	        		{
+	        			Session s = Hibernates.bdd.getSession();
+	        			Transaction t = s.beginTransaction();
+	        			s.persist(Hibernates.bdd.setEquipe(nom));
+	        			t.commit();
+	        			s.close();
+	        		}
+	        		catch (HibernateException ex)
+	        		{
+	        			throw new RuntimeException("Probleme de configuration : "
+	        					+ ex.getMessage(), ex);
+	        		}
 				}
 			});
 		}

@@ -31,6 +31,8 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
 	}
+	
+	Competition(){}
 
 	/**
 	 * Retourne le nom de la compétition.

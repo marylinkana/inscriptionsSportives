@@ -6,6 +6,11 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedSet;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import Hibernates.bdd;
 import Inscriptions.Candidat;
 import Inscriptions.Competition;
 import Inscriptions.Equipe;
@@ -262,6 +267,19 @@ public class MenuCompetition {
 				boolean type;
 				type = enEquipe.equals("oui");
                 inscriptions.createCompetition(nom, date, type);
+                try
+        		{
+        			Session s = Hibernates.bdd.getSession();
+        			Transaction t = s.beginTransaction();
+        			s.persist(Hibernates.bdd.setCompetition(nom, date, type));
+        			t.commit();
+        			s.close();
+        		}
+        		catch (HibernateException ex)
+        		{
+        			throw new RuntimeException("Probleme de configuration : "
+        					+ ex.getMessage(), ex);
+        		}
 			}
 		});
 	}

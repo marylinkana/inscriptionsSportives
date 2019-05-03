@@ -3,6 +3,10 @@ package Menus;
 import java.util.ArrayList;
 import java.util.SortedSet;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import Inscriptions.Candidat;
 import Inscriptions.Competition;
 import Inscriptions.Equipe;
@@ -137,7 +141,7 @@ public class MenuPersonne {
     }
 	private static Option removePersonToCompetition(Personne personne) {
         return new List<>(
-                "Ajouter ce candidat d'une competition ", "3",
+                "Supprémer ce candidat d'une competition ", "3",
                 new ListData<Competition>()
                 {
                     @Override
@@ -309,6 +313,19 @@ public class MenuPersonne {
 				String prenom = InOut.getString("Prénom : ");
                 String mail = InOut.getString("Email : ");
                 Personne personne = inscriptions.createPersonne(nom, prenom, mail);
+                try
+        		{
+        			Session s = Hibernates.bdd.getSession();
+        			Transaction t = s.beginTransaction();
+        			s.persist(Hibernates.bdd.setPersonne(nom, prenom, mail	));
+        			t.commit();
+        			s.close();
+        		}
+        		catch (HibernateException ex)
+        		{
+        			throw new RuntimeException("Probleme de configuration : "
+        					+ ex.getMessage(), ex);
+        		}
 			}
 		});
 	}

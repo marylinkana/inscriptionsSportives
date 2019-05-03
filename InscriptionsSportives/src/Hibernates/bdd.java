@@ -1,5 +1,7 @@
 package Hibernates;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
 
 @Entity
 @Table(name = "Personne")
@@ -42,6 +45,7 @@ class Personne
 	}
 }
 
+@Entity
 @Table(name = "Equipe")
 class Equipe
 {
@@ -50,19 +54,17 @@ class Equipe
 	@Column(name = "id_equipe")
 	private int id_equipe;
 
-	@Column(name = "num_equipe")
-	private int num_equipe;
 	
 	@Column(name = "nom_equipe")
 	private String nom_equipe;
 
-	public Equipe(int num_equipe, String nom_equipe)
+	public Equipe(String nom_equipe)
 	{
-		this.num_equipe = num_equipe;
 		this.nom_equipe = nom_equipe;
 	}
 }
 
+@Entity
 @Table(name = "Candidat")
 class Candidat
 {
@@ -70,16 +72,12 @@ class Candidat
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_candidat")
 	private int id_candidat;
-
-	@Column(name = "num_candidat")
-	private int num_candidat;
 	
 	@Column(name = "nom_candidat")
 	private String nom_candidat;
 
 	public Candidat(int num_candidat, String nom_candidat)
 	{
-		this.num_candidat = num_candidat;
 		this.nom_candidat = nom_candidat;
 	}
 }
@@ -93,27 +91,25 @@ class Competition
 	@Column(name = "id_competition")
 	private int id_competition;
 
-	@Column(name = "num_competition")
-	private int num_competition;
-
 	@Column(name = "nom_competition")
 	private String nom_competition;
 	
 	@Column(name = "date_cloture")
-	private String date_cloture;
+	private LocalDate date_cloture;
 	
 	@Column(name = "type")
-	private String type;
+	private boolean type;
 
-	public Competition(int num_competition, String nom_competition, String date_cloture, String type)
+	public Competition(String nom_competition, LocalDate date_cloture, boolean type)
 	{
-		this.num_competition = num_competition;
 		this.nom_competition = nom_competition;
 		this.date_cloture = date_cloture;
 		this.type = type;
 	}
+
 }
 
+@Entity
 @Table(name = "Appartenir")
 class Appartenir
 {
@@ -122,19 +118,20 @@ class Appartenir
 	@Column(name = "id_appartenir")
 	private int id_appartenir;
 
-	@Column(name = "num_personne")
-	private int num_personne;
+	@Column(name = "id_personne")
+	private int id_personne;
 	
-	@Column(name = "num_equipe")
-	private int num_equipe;
+	@Column(name = "id_equipe")
+	private int id_equipe;
 
-	public Appartenir(int num_personne, int num_equipe)
+	public Appartenir(int id_personne, int id_equipe)
 	{
-		this.num_personne = num_personne;
-		this.num_equipe = num_equipe;
+		this.id_personne = id_personne;
+		this.id_equipe = id_equipe;
 	}
 }
 
+@Entity
 @Table(name = "Inscrire")
 class Inscrire
 {
@@ -143,25 +140,58 @@ class Inscrire
 	@Column(name = "id_inscrire")
 	private int id_inscrire;
 
-	@Column(name = "num_candidat")
-	private int num_candidat;
+	@Column(name = "id_candidat")
+	private int id_candidat;
 	
-	@Column(name = "num_competition")
-	private int num_competition;
+	@Column(name = "id_competition")
+	private int id_competition;
 
-	public Inscrire(int num_candidat, int num_competition)
+	public Inscrire(int id_candidat, int id_competition)
 	{
-		this.num_candidat = num_candidat;
-		this.num_competition = num_candidat;
+		this.id_candidat = id_candidat;
+		this.id_competition = id_candidat;
 	}
 }
 
-public class PremierExemple
-{
-	private static Session getSession() throws HibernateException
+
+public class bdd
+{	 
+	public static Competition setCompetition(String nom_competition, LocalDate date_cloture, boolean type) {
+		
+		return new Competition(nom_competition,date_cloture,type);
+	}
+	
+	public static Equipe setEquipe(String nom_equipe) {
+		
+		return new Equipe(nom_equipe);
+	}
+	
+	public static Candidat setCandidat(int num_candidat, String nom_candidat)
+	{
+		return new Candidat(num_candidat, nom_candidat);
+	}
+	
+	public static Personne setPersonne(String nom, String prenom, String email) {
+		
+		return new Personne(nom, prenom, email);
+	}
+	
+	public static Appartenir setAppartenir(int id_personne, int id_equipe)
+	{
+		return new Appartenir(id_personne, id_equipe);
+	}
+	
+	public static Inscrire setInscrire(int id_candidat, int id_competition)
+	{
+		return new Inscrire(id_candidat, id_competition);
+
+	}
+	
+	
+	public static Session getSession() throws HibernateException
 	{
 		Configuration configuration = new Configuration()
-				.configure("Hibernates/PremierExemple.cfg.xml");
+				.configure("Hibernates/hibernate.cfg.xml");
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
 		SessionFactory sessionFactory = configuration
@@ -169,21 +199,4 @@ public class PremierExemple
 		return sessionFactory.openSession();
 	}
 
-	public static void main(String[] args)
-	{
-		try
-		{
-			Session s = getSession();
-			Personne amandine = new Personne("amandine", "thivet", "amandine@thivet");
-			Transaction t = s.beginTransaction();
-			s.persist(amandine);
-			t.commit();
-			s.close();
-		}
-		catch (HibernateException ex)
-		{
-			throw new RuntimeException("Probleme de configuration : "
-					+ ex.getMessage(), ex);
-		}
-	}
 }
