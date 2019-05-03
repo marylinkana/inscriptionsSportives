@@ -55,7 +55,7 @@ public class Competition
 	public static java.util.List getCompetition() {
 		try
 		{
-			Session s = Hibernates.bdd.getSession();
+			Session s = Hibernates.BDD.getSession();
 			Query requete = s.createQuery("select * from Competition");
 			java.util.List result = requete.list();
 			s.close();

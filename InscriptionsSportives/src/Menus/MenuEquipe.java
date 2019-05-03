@@ -245,7 +245,7 @@ public class MenuEquipe {
 	                inscriptions.createEquipe(nom);
 	                try
 	        		{
-	        			Session s = Hibernates.bdd.getSession();
+	        			Session s = Hibernates.BDD.getSession();
 	        			Transaction t = s.beginTransaction();
 	        			s.persist(Hibernates.Equipe.setEquipe(nom));
 	        			t.commit();

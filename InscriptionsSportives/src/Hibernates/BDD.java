@@ -20,7 +20,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import commandLineMenus.List;
 
-public class bdd
+public class BDD
 {	 
 	public static Session getSession() throws HibernateException
 	{

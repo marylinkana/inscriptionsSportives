@@ -10,7 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import Hibernates.bdd;
+import Hibernates.BDD;
 import Inscriptions.Candidat;
 import Inscriptions.Competition;
 import Inscriptions.Equipe;
@@ -269,7 +269,7 @@ public class MenuCompetition {
                 inscriptions.createCompetition(nom, date, type);
                 try
         		{
-        			Session s = Hibernates.bdd.getSession();
+        			Session s = Hibernates.BDD.getSession();
         			Transaction t = s.beginTransaction();
         			s.persist(Hibernates.Competition.setCompetition(nom, date, type));
         			t.commit();

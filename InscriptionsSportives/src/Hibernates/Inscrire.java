@@ -54,9 +54,8 @@ public class Inscrire
 	{
 		try
 		{
-			Session s = Hibernates.bdd.getSession();
-			Query requete = s.createQuery("select  from Competition");
-			@SuppressWarnings("rawtypes")
+			Session s = Hibernates.BDD.getSession();
+			Query requete = s.createQuery("from Inscrire");
 			java.util.List result = requete.list();
 			s.close();
 			return result;

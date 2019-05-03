@@ -49,8 +49,8 @@ public class Equipe
 		
 		try
 		{
-			Session s = Hibernates.bdd.getSession();
-			Query requete = s.createQuery("select * from Equipe");
+			Session s = Hibernates.BDD.getSession();
+			Query requete = s.createQuery("from Equipe");
 			@SuppressWarnings("rawtypes")
 			java.util.List result = requete.list();
 			s.close();

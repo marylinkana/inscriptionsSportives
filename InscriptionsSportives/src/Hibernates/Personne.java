@@ -57,8 +57,8 @@ public class Personne
 		
 		try
 		{
-			Session s = Hibernates.bdd.getSession();
-			Query requete = s.createQuery("select  from Personne");
+			Session s = Hibernates.BDD.getSession();
+			Query requete = s.createQuery("from Personne");
 			java.util.List result = requete.list();
 			s.close();
 			return result;

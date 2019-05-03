@@ -48,8 +48,8 @@ public class Candidat
 	{
 		try
 		{
-			Session s = Hibernates.bdd.getSession();
-			Query requete = s.createQuery("select  from Candidat");
+			Session s = Hibernates.BDD.getSession();
+			Query requete = s.createQuery("from Candidat");
 			@SuppressWarnings("rawtypes")
 			java.util.List result = requete.list();
 			s.close();
