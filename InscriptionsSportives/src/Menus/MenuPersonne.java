@@ -317,7 +317,7 @@ public class MenuPersonne {
         		{
         			Session s = Hibernates.bdd.getSession();
         			Transaction t = s.beginTransaction();
-        			s.persist(Hibernates.bdd.setPersonne(nom, prenom, mail	));
+        			s.persist(Hibernates.Personne.setPersonne(nom, prenom, mail	));
         			t.commit();
         			s.close();
         		}

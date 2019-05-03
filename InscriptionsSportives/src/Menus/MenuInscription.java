@@ -63,26 +63,6 @@ public class MenuInscription
 	
 
 	private Inscriptions inscriptions;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-
-	
-
-	
-
 
 }
 

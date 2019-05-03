@@ -271,7 +271,7 @@ public class MenuCompetition {
         		{
         			Session s = Hibernates.bdd.getSession();
         			Transaction t = s.beginTransaction();
-        			s.persist(Hibernates.bdd.setCompetition(nom, date, type));
+        			s.persist(Hibernates.Competition.setCompetition(nom, date, type));
         			t.commit();
         			s.close();
         		}

@@ -247,7 +247,7 @@ public class MenuEquipe {
 	        		{
 	        			Session s = Hibernates.bdd.getSession();
 	        			Transaction t = s.beginTransaction();
-	        			s.persist(Hibernates.bdd.setEquipe(nom));
+	        			s.persist(Hibernates.Equipe.setEquipe(nom));
 	        			t.commit();
 	        			s.close();
 	        		}
