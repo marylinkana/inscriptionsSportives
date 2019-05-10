@@ -71,6 +71,17 @@ public class EquipeTest {
 	}
 	
 	@Test
+	public void dupliquer() {
+		equipetest2.add(personnetest);
+		equipetest2.add(personnetest2);
+		Equipe copieEquipetest2 = equipetest2.dupliquer();
+		assertTrue(copieEquipetest2.getNom().equals("copie-"+equipetest2.getNom()));
+		assertTrue(copieEquipetest2.getMembres().equals(equipetest2.getMembres()));
+		assertTrue(copieEquipetest2.getCompetitions().isEmpty());
+
+	}
+	
+	@Test
 	public void testgetPersonnesAAjouter() {
 		equipetest.add(personnetest2);
 		// assertfalse(equipetest.getPersonnesAAjouter().contains(personnetest2));

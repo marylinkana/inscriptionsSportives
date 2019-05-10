@@ -81,6 +81,18 @@ public class Equipe extends Candidat
 	{
 		super.delete();
 	}
+	
+	public Equipe dupliquer()
+	{
+
+		String nom = super.getNom();
+		Equipe copie = super.inscriptions.createEquipe("copie-"+nom);
+		SortedSet<Personne> membres = this.getMembres();
+		for(Personne unMembre: membres) {
+			copie.add(unMembre);
+		}
+		return copie;
+	}
 	 
 	@Override
 	public String toString()

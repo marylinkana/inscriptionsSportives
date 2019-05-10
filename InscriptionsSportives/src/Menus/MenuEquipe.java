@@ -69,12 +69,15 @@ public class MenuEquipe {
 		{
 			Menu equipeMenu = new Menu("Edit " + equipe.getNom(), equipe.getNom(), null);
 			equipeMenu.add(afficheNomEquipe(equipe));
+			equipeMenu.add(dupliqueEquipe(equipe));
 			equipeMenu.add(editMemberEquipe(equipe));
 			equipeMenu.add(editCompetitionEquipe(equipe));
 			equipeMenu.add(supprimeEquipe(equipe));
 			equipeMenu.setAutoBack(true);
 			return equipeMenu;
 		}
+		
+
 		
 		private static Menu editMemberEquipe(Equipe equipe)
 		{
@@ -92,7 +95,7 @@ public class MenuEquipe {
 			Menu equipeMenu = new Menu("edit competition to équipe Sub-Menu", "Competition", "co");
 			equipeMenu.add(getCompetitionOfEquipe(equipe));
 			equipeMenu.add(addEquipeToCompetition(equipe));
-			equipeMenu.add(removeEquipeToEquipe(equipe));
+			equipeMenu.add(removeEquipeToCompetition(equipe));
 			equipeMenu.addBack("r");
 
 			return equipeMenu;
@@ -128,7 +131,7 @@ public class MenuEquipe {
 		
 		private static Option addEquipeToCompetition(Equipe equipe) {
 	        return new List<>(
-	                "Ajouter cette équipe à une competition", "2",
+	                "Ajouter cette équipe à une competition", "1",
 	                new ListData<Competition>()
 	                {
 	                    @Override
@@ -146,9 +149,10 @@ public class MenuEquipe {
 	        );
 	    }
 		
-		private static Option removeEquipeToEquipe(Equipe equipe) {
+		
+		private static Option removeEquipeToCompetition(Equipe equipe) {
 	        return new List<>(
-	                "Ajouter cette équipe à une competition", "2",
+	                "Retirer cette équipe d'une competition", "2",
 	                new ListData<Competition>()
 	                {
 	                    @Override
@@ -219,6 +223,18 @@ public class MenuEquipe {
 				}
 			});
 		}
+		
+		private static Option dupliqueEquipe(Equipe equipe) {
+			return new Option("dupliquer cette équipe", "dup", new Action()
+			{
+				@Override
+				public void optionSelected()
+				{
+					Equipe copie = equipe.dupliquer();
+					System.out.println(equipe.getNom()+" à bien été dupliqué en : "+copie.getNom());
+				}
+			});
+	    }
 		
 		
 		
